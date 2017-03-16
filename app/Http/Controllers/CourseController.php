@@ -11,7 +11,7 @@ class CourseController extends Controller
     	$courses = Course::latest()
     	->get();
 
-    	return view('courses.index');
+    	return view('courses.index',compact('courses'));
     }
 
 
@@ -22,19 +22,22 @@ class CourseController extends Controller
     public function store(){
     	$this -> validate(request(),[
     		'url' => 'required',
-    		'tags' => 'required'
+    		'tags' => 'required',
+    		'name' =>'required'
 
 
     		]);
 
     	auth()->user()->publish(
-    			new Course(request(['url','tags']))
+    			new Course(request(['url','name']))
 
     		);
 
     	return redirect('/courses');
 
     }
+
+    
 
     public function show(Course $course){
     	return view('course.show',compact('course'));

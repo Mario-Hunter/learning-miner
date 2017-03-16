@@ -10,7 +10,7 @@ class Comment extends Model
 
     
     public function course(){
-    	return $this->belongsto(Course::class);
+    	return $this->belongsTo(Course::class);
     }
     public function user(){
     	return $this->belongsTo(User::class);
