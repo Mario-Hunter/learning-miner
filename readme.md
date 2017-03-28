@@ -9,9 +9,9 @@ Laravel crafted application to index the educational courses.
 
 ## Installing Project
 
-1- pull the project from the repository.
-2- use the command "composer install" to install all the dependencies.
-3- configure the .env file to match the DB informations, mail services.
+- pull the project from the repository.
+- use the command "composer install" to install all the dependencies.
+- configure the .env file to match the DB informations, mail services.
 
 ## License
 
