@@ -1,21 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
-<div class="col-sm-8 blog-main">
+
+<div class="container">
+	<div class="row">
+		@include('courses.course')	
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<br>
+			<a class="btn btn-info active" href="" role="button">Previous</a>
+			<a class="btn btn-info active" href="" role="button">Next</a>
+		</div>	
+	</div>
+</div>
 
 
-	@include('courses.course')
 
-
-
-
-
-<nav>
-	<ul class="pager">
-		<li><a href="#">Previous</a></li>
-		<li><a href="#">Next</a></li>
-	</ul>
-</nav>
-
-</div><!-- /.blog-main -->
-@stop
