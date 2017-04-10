@@ -24,6 +24,8 @@ Route::post('/courses', 'CourseController@store');
 Route::get('/courses/create', 'CourseController@create');
 Route::get('/courses/{course}', 'CourseController@show');
 
+Route::get('/courses/tags/{tag}','TagController@index');
+
 Route::post('/search', 'SearchController@set');
 Route::get('/search/{course}', 'SearchController@show');
 

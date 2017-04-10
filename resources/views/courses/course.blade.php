@@ -7,7 +7,7 @@
 	<p class="blog-course-meta" >
 	@foreach($course->tags()->get() as $tag)
 
-	{{$tag->name}}
+	<a href="/courses/tags/{{$tag->name}}"> {{$tag->name}}</a>
 
 	@endforeach
 	</p>
