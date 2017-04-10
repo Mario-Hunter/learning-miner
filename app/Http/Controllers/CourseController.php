@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Course;
+use App\Tag;
 
 class CourseController extends Controller
 {
@@ -33,8 +34,10 @@ public function store(){
 
       ]);
 
+   $tag = Tag::firstOrCreate(['name'=>request('tags')]);
+
    auth()->user()->publish(
-     new Course(request(['url','name']))
+     new Course(request(['url','name'])),$tag
 
      );
 
@@ -45,7 +48,7 @@ public function store(){
 
 
 public function show(Course $course){
-   return view('course.show',compact('course'));
+   return view('courses.show',compact('course'));
 }
 
 }

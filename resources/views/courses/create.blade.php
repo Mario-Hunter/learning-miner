@@ -23,7 +23,7 @@
 
 		<div class="form-group">
 			<label for="tags">Tags</label>
-			<textarea id="tags" name = "tags" class ="form-control" required></textarea>
+			<input id="tags" name = "tags" class ="form-control" required></input>
 		</div>
 
 		<div class = 'class form-group'>
