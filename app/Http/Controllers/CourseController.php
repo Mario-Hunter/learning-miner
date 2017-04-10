@@ -7,40 +7,43 @@ use App\Course;
 
 class CourseController extends Controller
 {
-    public function index(){
-    	$courses = Course::latest()
-    	->get();
 
-    	return view('courses.index',compact('courses'));
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show', 'index']);
     }
 
 
-    public function create(){
-    	return view('courses.create');
+    public function index()
+    {
+      $courses = Course::latest()->get();
+
+      return view('courses.index',compact('courses'));
     }
 
-    public function store(){
-    	$this -> validate(request(),[
-    		'url' => 'required',
-    		'tags' => 'required',
-    		'name' =>'required'
 
+    public function create()
+    {
+      return view('courses.create');
+    }
 
-    		]);
+    public function store()
+    {
+      $this -> validate(request(),[
+                                  'url' => 'required',
+                                  'tags' => 'required',
+                                  'name' =>'required'
+                                    ]);
 
-    	auth()->user()->publish(
-    			new Course(request(['url','name']))
+      auth()->user()->publish(new Course(request(['url','name'])));
 
-    		);
-
-    	return redirect('/courses');
+      return redirect('/courses');
 
     }
 
-    
-
-    public function show(Course $course){
-    	return view('course.show',compact('course'));
+    public function show(Course $course)
+    {
+      return view('courses.show',compact('course'));
     }
 
 }
