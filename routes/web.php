@@ -12,14 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/courses');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
 Route::get('/courses', 'CourseController@index');
 Route::post('/courses', 'CourseController@store');
 Route::get('/courses/create', 'CourseController@create');
+Route::get('/courses/{course}', 'CourseController@show');
+
+Route::post('/search', 'SearchController@set');
+Route::get('/search/{course}', 'SearchController@show');
 
 Route::post('/courses/{course}/comments','CommentController@store');
