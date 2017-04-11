@@ -22,6 +22,7 @@
     <div class="container" style="height:500px;">
       @yield('content')
     </div>
+    @include('layouts.errors')
     @include('layouts.jquery')
 
   </body>

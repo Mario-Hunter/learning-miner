@@ -31,10 +31,10 @@ class User extends Authenticatable
         return $this->hasMany(Course::class);
     }
 
-    public function publish(Course $course,Tag $tag){
+    public function publish(Course $course){
 
         $this->courses()->save($course);
-        $course->tags()->attach($tag);
+        
 
     }
 }
