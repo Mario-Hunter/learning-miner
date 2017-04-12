@@ -27,13 +27,14 @@ public function create(){
 
 public function store(){
  $this -> validate(request(),[
-  
+
   'url' => 'required|url|unique:courses,url',
   'tags' => 'required',
   'name' =>'required'
 
 
   ]);
+ 
  $tags = explode(' ',request('tags'));
 
  $course = new Course(request(['url','name']));
@@ -43,8 +44,9 @@ public function store(){
 
 
  foreach($tags as $newTag){
-  $words= "is in at or on ";
-  if (stripos($words, $newTag) == false ){
+  $bannedWords= "is in at or on ";
+
+  if (stripos($bannedWords, $newTag) == 0 && !is_numeric($newTag) ){
     $tag = Tag::firstOrCreate(['name'=>$newTag]);
     
     $course->tags()->syncWithoutDetaching([$tag->id]);
