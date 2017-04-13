@@ -9,6 +9,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css"></link>
 
     <!-- Custom styles for this template -->
     <link href="/css/miner.css" rel="stylesheet">
