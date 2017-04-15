@@ -46,7 +46,7 @@
          
       <li class="nav-item active">
          
-        <a class="nav-link" href="/home">Home</a>
+        <a class="nav-link" href="/home/{{auth()->user()->id}}">Home</a>
          
       </li>
          

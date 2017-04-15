@@ -27,9 +27,7 @@
 		
 		@endforeach
 
-	
 	</p>
-
 
 <hr>
 <br>
