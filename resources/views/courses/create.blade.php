@@ -27,7 +27,7 @@
 		</div>
 
 		<div class = 'class form-group'>
-			<button type="submit" class="btn btn-primary">Publish</button>
+			<button type="submit" class="btn btn-primary" >Publish</button>
 		</div>
 
 	</form>

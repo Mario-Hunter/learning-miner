@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Tag;
 use App\Rank;
+use App\User;
 
 class CourseController extends Controller
 {
@@ -57,9 +58,9 @@ public function store(){
       }
     }
   }
-  public function show(Course $course)
+  public function show(Course $course, User $user)
   {
-    return view('courses.show',compact('course'));
+    return view('courses.show',compact('course','user'));
   }
 
 }

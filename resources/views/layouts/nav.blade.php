@@ -55,6 +55,14 @@
           <a class="nav-link" href="/courses/create">Add Course</a>
          
         </li>
+
+        <li class="nav-item">
+         
+          <a class="nav-link" href="/courses">My Courses</a>
+         
+
+         
+        </li>
          
         <li class="nav-item">
          
