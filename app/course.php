@@ -31,16 +31,34 @@ class Course extends Model
                     'course_id' => $this->id,
                     'user_id' => auth()->id()
             ]);
-        $this->rankModifier($value);
+        $this->totalRankModifier($value);
     }
 
-    public function rankModifier($value)
+    public function totalRankModifier($value)
     {
-        $rankCourse = $this->rank;
+        $rankCourse = $this->totalRanks;
         $rankCourse += $value;
-        $this->rank = $rankCourse;
+        $this->totalRanks = $rankCourse;
+        $this->save();
+        $this->averageRank();
+    }
+
+    public function averageRank()
+    {
+        $numberOfRanks = 0;
+        foreach ($this->rank()->get() as $ranking) {
+            $numberOfRanks++;
+        }
+        
+        if($numberOfRanks == 0)
+            $numberOfRanks = 1;
+
+        $rank = $this->totalRanks;
+        $rank /= (float) $numberOfRanks;
+        $this->rank = $rank;
         $this->save();
     }
+
 
     public function user()
     {

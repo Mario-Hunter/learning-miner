@@ -19,7 +19,8 @@ class CreateCoursesTable extends Migration
             $table->string('url');
             $table->string('name');
             $table->integer('user_id');
-            $table->integer('rank')->default(0);
+            $table->float('rank')->default(0);
+            $table->integer('totalRanks')->default(0);
         });
     }
 

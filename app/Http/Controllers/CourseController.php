@@ -57,7 +57,10 @@ public function store(){
         $course->tags()->syncWithoutDetaching([$tag->id]);
       }
     }
+
+    return redirect('/courses');
   }
+
   public function show(Course $course, User $user)
   {
     return view('courses.show',compact('course','user'));

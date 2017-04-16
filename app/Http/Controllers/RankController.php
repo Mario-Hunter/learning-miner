@@ -14,11 +14,11 @@ class RankController extends Controller
 
 	public function store(Course $course)
 	{
+		
 		$newRank = request('rank');
 		$user = auth()->user();
 		$rankCase = $user->isRanked($course, $newRank ,$user);
 		$rank = $user->rankValue($course, $user);
-
 		if(!$rankCase)
 		{
 			if($rank['rank'] == null)
@@ -28,7 +28,7 @@ class RankController extends Controller
 				$oldRank = $rank['rank'];
 				$rank['rank'] = $newRank;
 				$rank->save();
-				$course->rankModifier($newRank - $oldRank);
+				$course->totalRankModifier($newRank - $oldRank);
 			}
 		}
 
