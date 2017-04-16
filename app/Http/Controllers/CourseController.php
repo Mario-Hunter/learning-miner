@@ -15,6 +15,7 @@ class CourseController extends Controller
   {
     $this->middleware('auth',['except' => ['index','show']]);
   }
+
   public function index()
   {
     $courses = Course::latest()
@@ -23,15 +24,15 @@ class CourseController extends Controller
     return view('courses.index',compact('courses'));
   }
 
-
   public function create()
   {
     return view('courses.create');
   }
 
 
-public function store(){
- $this -> validate(request(),[
+  public function store(){
+  
+  $this -> validate(request(),[
 
   'url' => 'required|url|unique:courses,url',
   'tags' => 'required',

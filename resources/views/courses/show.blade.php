@@ -9,11 +9,20 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<br>
-			<a class="btn btn-info active" href="" role="button">Previous</a>
-			<a class="btn btn-info active" href="" role="button">Next</a>
-		</div>	
+
+		
+			@if($course->buttonCases() == 1)
+				<a class="btn btn-info active" href="/courses/{{($course->id ) - 1}}" role="button">Previous</a>
+				<a class="btn btn-info active" href="/courses/{{($course->id ) + 1}}" role="button">Next</a>
+			@elseif($course->buttonCases() == 2)
+				<a class="btn btn-info active" href="/courses/{{($course->id ) - 1}}" role="button">Previous</a>
+			@elseif($course->buttonCases() == 3)
+				<a class="btn btn-info active" href="/courses/{{($course->id ) + 1}}" role="button">Next</a>
+			@else
+			@endif
+		
+		</div>
 	</div>
 </div>
-
 
 

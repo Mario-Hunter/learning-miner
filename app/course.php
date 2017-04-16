@@ -73,4 +73,35 @@ class Course extends Model
     {
         return $this->hasMany(Rank::class);
     }
+
+    public function buttonCases()
+    {
+        $idPrev = $this->id;
+        $idPrev--;
+        $idNext = $this->id;
+        $idNext++;
+
+        $coursePrev = Course::where('id',"$idPrev")->get();
+        $courseNext = Course::where('id',"$idNext")->get();
+
+        $prevFlag = false;
+        $nextFlag = false;
+
+        foreach ($coursePrev as $key) {
+            $prevFlag = true;
+        }
+
+        foreach ($courseNext as $key) {
+            $nextFlag = true;
+        }
+
+
+        if($nextFlag && $prevFlag)
+            return 1;
+        else if(!$nextFlag && $prevFlag)
+            return 2;
+        else if($nextFlag && !$prevFlag)
+            return 3;
+    }
+
 }
