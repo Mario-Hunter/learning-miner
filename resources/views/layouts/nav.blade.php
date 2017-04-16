@@ -30,7 +30,7 @@
 
     {{csrf_field()}}
     
-      <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search">
+      <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" required>
     
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     
@@ -81,7 +81,7 @@
     
       {{csrf_field()}}
 
-      <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search">
+      <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" required>
   
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   

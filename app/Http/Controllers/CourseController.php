@@ -18,8 +18,7 @@ class CourseController extends Controller
 
   public function index()
   {
-    $courses = Course::latest()
-    ->get();
+    $courses = Course::latest()->get();
 
     return view('courses.index',compact('courses'));
   }
