@@ -167,7 +167,10 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        /*
+         * Package Service Providers...
+         */
+        Weidner\Goutte\GoutteServiceProvider::class, // [1]
         /*
          * Application Service Providers...
          */
@@ -176,7 +179,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        'Elvedia\Goutte\Providers\GoutteServiceProvider',
 
     ],
 
@@ -226,7 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Goutte' => 'Elvedia\Goutte\Facades\GoutteFacade',
+          'Goutte' => Weidner\Goutte\GoutteFacade::class, // [2]
+        'Hash' => Illuminate\Support\Facades\Hash::class,
 
     ],
 
