@@ -61,9 +61,6 @@ class CourseController extends Controller
     return redirect('/courses');
   }
 
-  public function show(Course $course, User $user)
-  {
-    return view('courses.show',compact('course','user'));
-  }
+  
 
 }
