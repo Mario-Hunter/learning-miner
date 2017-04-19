@@ -104,4 +104,18 @@ class Course extends Model
             return 3;
     }
 
+    public function insertTags($course,$tags){
+    foreach($tags as $newTag)
+    {
+      $bannedWords= "is in at or on ";
+
+      if (stripos($bannedWords, $newTag) == 0 && !is_numeric($newTag) )
+      {
+        $tag = Tag::firstOrCreate(['name'=>$newTag]);
+        
+        $course->tags()->syncWithoutDetaching([$tag->id]);
+      }
+    }
+  }
+
 }

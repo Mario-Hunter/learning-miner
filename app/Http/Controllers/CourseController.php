@@ -45,22 +45,13 @@ class CourseController extends Controller
     $course = new Course(request(['url','name']));
  
     auth()->user()->publish($course);
-
-    foreach($tags as $newTag)
-    {
-      $bannedWords= "is in at or on ";
-
-      if (stripos($bannedWords, $newTag) == 0 && !is_numeric($newTag) )
-      {
-        $tag = Tag::firstOrCreate(['name'=>$newTag]);
-        
-        $course->tags()->syncWithoutDetaching([$tag->id]);
-      }
-    }
+    insertTags($course,$tags);
+    
 
     return redirect('/courses');
   }
 
+  
   
 
 }

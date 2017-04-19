@@ -7,6 +7,7 @@ use Goutte\Client;
 use App\User;
 use App\course;
 use App\Tag;
+use Illuminate\Support\Facades\Auth;
 
 class CrawlerController extends Controller
 {
@@ -31,30 +32,23 @@ class CrawlerController extends Controller
 		$titles = $crawler->filter('h2[class^="color-primary-text headline-1-text flex-1"]')->each(function ($node) {
 			return $node->text()."<br>";
 		});
-		
+		$user = auth()->user();
 		for ($i = 0; $i < count($urls); ++$i) {
 			$data = [
 			'url'=>$urls[$i],
 			'name'=>$titles[$i]
 			];
+			$admin  = User::find(3);
+			Auth::login($admin);
 			$course =new Course($data);
 			auth()->user()->publish($course);
-			$tags=explode(' ',$query);;
-			foreach($tags as $newTag)
-			{
-				$bannedWords= "is in at or on ";
-
-				if (stripos($bannedWords, $newTag) == 0 && !is_numeric($newTag) )
-				{
-					$tag = Tag::firstOrCreate(['name'=>$newTag]);
-
-					$course->tags()->syncWithoutDetaching([$tag->id]);
-				}
-			}
+			$tags=explode(' ',$query);
+			$course->insertTags($course,$tags);
 			echo $urls[$i];
 			echo $titles[$i];
 
 		}
+		Auth::login($user);
 	}
 
 	
