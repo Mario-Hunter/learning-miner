@@ -39,5 +39,5 @@ Route::post('/courses/{course}/comments','CommentController@store');
 Route::get('/users/{user}','UserController@show');
 Route::get('/user/{user}','UserController@showUserCourses');
 
-Route::get('crawl/','CrawlerController@crawl');
+Route::get('crawl/{query}','CrawlerController@crawl');
 
