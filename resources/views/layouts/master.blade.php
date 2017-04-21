@@ -15,6 +15,7 @@
   <link href="/css/miner.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href=" /css/ratings.css">
+  <link rel="stylesheet" type="text/css" href=" /css/LivePreview.css">
   <script type="text/javascript">
    function change(id)
    {
@@ -37,7 +38,7 @@
 
 </head>
 
-<body>
+<body background="wood.jpg">
 
   @include('layouts.nav')
 

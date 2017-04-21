@@ -3,7 +3,7 @@
 	
 	<p class="blog-course-meta">{{$course->created_at->toFormattedDateString()}}, by <a href="/users/{{$course ->user->id}}" >{{$course->user->first_name}}{{' '}}{{$course->user->last_name}}</a></p>
 
-	<p><a href = {{$course->url}} > {{$course->url}}</a> </p>
+	<a id="livePrev" href = {{$course->url}} > {{$course->url}}</a><div class="box"><iframe src="https://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div>
 	<p class="blog-course-meta" >
 		@foreach($course->tags()->get() as $tag)
 

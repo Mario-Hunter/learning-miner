@@ -43,12 +43,16 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
     <ul class="navbar-nav mr-auto">
-         
-      <li class="nav-item active">
-         
-        <a class="nav-link" href="/home/{{auth()->user()->id}}">Home</a>
-         
-      </li>
+        <script>
+            var loc = document.location.href;
+            if (loc === "http://localhost:8000/home/1") 
+            { 
+                <li class="nav-item active">
+                <a class="nav-link" href="/home/{{auth()->user()->id}}">Home</a>
+                </li>
+            }
+        </script>
+                <a class="nav-link" href="/home/{{auth()->user()->id}}">Home</a>
          
         <li class="nav-item">
          
@@ -65,8 +69,6 @@
         <a class="nav-link" href="/userInfo/{{auth()->user()->id}}">My Info</a>
          
       </li>
-         
-
          
         </li>
          
