@@ -59,6 +59,12 @@
         <li class="nav-item">
          
           <a class="nav-link" href="/courses">My Courses</a>
+
+          <li class="nav-item active">
+         
+        <a class="nav-link" href="/userInfo/{{auth()->user()->id}}">My Info</a>
+         
+      </li>
          
 
          

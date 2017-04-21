@@ -86,5 +86,11 @@ class UserController extends Controller
         $courses=$user->courses();
         return view('index.blade',compact('courses'));
     }
+
+    public function showUserInfo(User $user ,Course $course)
+    {
+      
+        return view('users.info',compact('user','course'));
+    }
     
 }
