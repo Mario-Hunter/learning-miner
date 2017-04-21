@@ -22,19 +22,19 @@
 			{{csrf_field() }}
 			<div class="col-md-8">
 				<p>Your review..</p>
-				<input type="hidden" id="star1_hidden" value="1">
-				<img src="/images/star1.png" onmouseover="change(this.id);" id="star1" class="star">
-				<input type="hidden" id="star2_hidden" value="2">
-				<img src="/images/star1.png" onmouseover="change(this.id);" id="star2" class="star">
-				<input type="hidden" id="star3_hidden" value="3">
-				<img src="/images/star1.png" onmouseover="change(this.id);" id="star3" class="star">
-				<input type="hidden" id="star4_hidden" value="4">
-				<img src="/images/star1.png" onmouseover="change(this.id);" id="star4" class="star">
-				<input type="hidden" id="star5_hidden" value="5">
-				<img src="/images/star1.png" onmouseover="change(this.id);" id="star5" class="star">
+				<input type="hidden" id="star1{{$course->id}}_hidden" value="1">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star1{{$course->id}}"  class="star">
+				<input type="hidden" id="star2{{$course->id}}_hidden" value="2">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star2{{$course->id}}" class="star">
+				<input type="hidden" id="star3{{$course->id}}_hidden" value="3">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star3{{$course->id}}" class="star">
+				<input type="hidden" id="star4{{$course->id}}_hidden" value="4">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star4{{$course->id}}" class="star">
+				<input type="hidden" id="star5{{$course->id}}_hidden" value="5">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star5{{$course->id}}" class="star">
 			</div>
 
-			<input type="hidden" name="starrating" id="starrating" value="0">
+			<input type="hidden" name="starrating" id="rating{{$course->id}}" value="0">
 			<input type="submit" value="Submit" name="submit_rating">
 
 		</form> 

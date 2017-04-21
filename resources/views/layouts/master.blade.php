@@ -18,18 +18,19 @@
   <script type="text/javascript">
    function change(id)
    {
-    var cname=document.getElementById(id).className;
-    var ab=document.getElementById(id+"_hidden").value;
-    document.getElementById(cname+"rating").value=ab;
+    var course_id = id.substring(5);
+    var cname=document.getElementById(""+id).className;
+    var ab=document.getElementById(""+id+"_hidden").value;
+    document.getElementById("rating"+course_id).value=ab;
 
     for(var i=ab;i>=1;i--)
     {
-     document.getElementById(cname+i).src="/images/star2.png";
+     document.getElementById(""+cname+i+course_id).src="/images/star2.png";
    }
    var id=parseInt(ab)+1;
    for(var j=id;j<=5;j++)
    {
-     document.getElementById(cname+j).src="/images/star1.png";
+     document.getElementById(""+cname+j+course_id).src="/images/star1.png";
    }
  }
 </script>
