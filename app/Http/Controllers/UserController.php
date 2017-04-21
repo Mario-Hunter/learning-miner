@@ -8,6 +8,8 @@ use App\Course;
 use App\Tag;
 use App\Rank;
 use App\User;
+use Image;
+use Auth;
 class UserController extends Controller
 {
     /**
@@ -93,4 +95,17 @@ class UserController extends Controller
         return view('users.info',compact('user','course'));
     }
     
+    public function update_avatar(Request $request){
+    if($request->hasFile('avatar')){
+    $avatar = $request->file('avatar');
+    $filename=time() . '.' . $avatar->getClientOriginalExtension();
+    Image::make($avatar)->resize(300,300)->save(public_path('/uploads/avatars/' . $filename));
+        $user= Auth::user();
+        $user->avatar=$filename;
+        $user->save();
+        
+    }
+    return view('users.info',array('user'=> Auth::user()));
+
+}
 }

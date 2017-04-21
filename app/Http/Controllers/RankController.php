@@ -30,6 +30,13 @@ class RankController extends Controller
 				$rank->save();
 				$course->totalRankModifier($newRank - $oldRank);
 			}
+
+			$userToBeRanked = $course->user()->get();
+			$score = $userToBeRanked[0]->user_score;
+			$score += ($newRank - 2) * (($user->user_score + 100) / 100);
+			$userToBeRanked[0]->user_score = $score;
+			$userToBeRanked[0]->save();
+
 		}
 
 		return redirect('/courses'."/$course->id");

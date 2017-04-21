@@ -39,6 +39,7 @@ Route::post('/courses/{course}/comments','CommentController@store');
 Route::get('/users/{user}','UserController@show');
 Route::get('/user/{user}','UserController@showUserCourses');
 Route::get('/userInfo/{user}','UserController@showUserInfo');
+Route::post('/userInfo/{user}','UserController@update_avatar');
 
 Route::get('crawl/{query}','CrawlerController@crawl');
 

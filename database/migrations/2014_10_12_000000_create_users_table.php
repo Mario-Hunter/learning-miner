@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('avatar')->default('default.jpg');
             $table->float('user_score')->default(0);
             $table->rememberToken();
             $table->timestamps();

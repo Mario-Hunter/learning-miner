@@ -1,5 +1,12 @@
 <div class="blog-course col-md-4">
+	<img src="/uploads/avatars/{{$user->avatar}}" style="width: 150px; height:150px; float:left; border-radius:100%; margin-right: 25px; ">
 	<h2 class="blog-course-title">{{$user->first_name}}{{' '}}{{$user->last_name}}</h2>
+	<form enctype="multipart/form-data" action="/userInfo/{{$user->id}}" method="POST">
+		<label>Update Profile Image</label>
+			<input type="file" name="avatar">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="submit" class="pull-right btn btn-sm btn-primary">
+	</form>
 	
 
 	<table class="table table-user-information">

@@ -48,7 +48,7 @@ class CourseController extends Controller
     
     $course->insertTags($course,$tags);
    
-    auth()->user()->addScore(); 
+    auth()->user()->addScore(5); 
 
     return redirect('/courses');
   }
