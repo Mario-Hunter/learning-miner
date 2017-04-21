@@ -3,25 +3,28 @@
 @section('content')
 
 
-@foreach($coursesNames as $course)
-	<div class="container row">
-   		@include('courses.course')
-   	</div>
+@foreach($coursesNames as $courseCollection)
+@foreach($courseCollection as $course)
+<div class="container row">
+ @include('courses.course')
+</div>
 
-   	<br>
-   	<hr>
+<br>
+<hr>
+@endforeach
 @endforeach
 
 
 
-@foreach($coursesTags as $course)
-	<div class="container row">
-   		@include('courses.course')
-   	</div>
+@foreach($coursesTags as $courseCollection)
+@foreach($courseCollection as $course)
+<div class="container row">
+ @include('courses.course')
+</div>
 
-   	<br>
-   	<hr>
+<br>
+<hr>
 @endforeach
 
-
+@endforeach
 @stop

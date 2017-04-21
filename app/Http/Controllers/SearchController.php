@@ -26,17 +26,24 @@ class SearchController extends Controller
 
     public function show($course)
     {
-
-        $tags = Tag::where('name',$course)->get();
-
-        $coursesTags = $tags['0']->courses()->orderBy('rank','desc')->get();
-
-        if($coursesTags == null)
-        {
-            $coursesNames = Course::where('name',$course)->orderBy('rank','desc')->get();
+        $tags = explode(' ',$course);
+        $coursesTags = array();
+        $coursesNames = array();
+        foreach($tags as $tag){
+            $tagEntry = Tag::where('name',$tag)->get();
+            if($tagEntry == null){
+                continue;
+            }
+            $courses =$tagEntry[0]->courses()->orderBy('rank','desc')->get();
+            if ($courses['0'] != null){
+                array_push($coursesTags, $courses );
+            }else{
+                $coursesNames = Course::where('name','LIKE','%'.$course.'%')->orderBy('rank','desc')->get();
+            }
         }
-        else
-            $coursesNames = [];
+
+
+               
         return view('search',compact('coursesNames','coursesTags'));
     }
 }
