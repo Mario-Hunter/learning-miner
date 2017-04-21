@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -230,7 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
           'Goutte' => Weidner\Goutte\GoutteFacade::class, // [2]
         'Hash' => Illuminate\Support\Facades\Hash::class,
-
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
