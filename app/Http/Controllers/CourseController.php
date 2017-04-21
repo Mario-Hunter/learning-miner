@@ -52,6 +52,9 @@ class CourseController extends Controller
   }
 
   
-  
+  public function show(Course $course, User $user)
+   {
+     return view('courses.show',compact('course','user'));
+   }
 
 }

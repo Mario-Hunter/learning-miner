@@ -15,7 +15,7 @@ class RankController extends Controller
 	public function store(Course $course)
 	{
 		
-		$newRank = request('rank');
+		$newRank = request('starrating');
 		$user = auth()->user();
 		$rankCase = $user->isRanked($course, $newRank ,$user);
 		$rank = $user->rankValue($course, $user);

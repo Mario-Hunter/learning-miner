@@ -5,10 +5,10 @@
 
 	<p><a href = {{$course->url}} > {{$course->url}}</a> </p>
 	<p class="blog-course-meta" >
-	@foreach($course->tags()->get() as $tag)
+		@foreach($course->tags()->get() as $tag)
 
-	<a href="/courses/tags/{{$tag->name}}"> {{$tag->name}}</a>
-	@endforeach
+		<a href="/courses/tags/{{$tag->name}}"> {{$tag->name}}</a>
+		@endforeach
 	</p>
 
 
@@ -18,7 +18,27 @@
 		</div>
 		<hr>
 		@if(!Auth::guest())
+		<form  class="form-group" method="post" action="/courses/{{$course->id}}/rank ">
+			{{csrf_field() }}
+			<div class="col-md-8">
+				<p>Your review..</p>
+				<input type="hidden" id="star1_hidden" value="1">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star1" class="star">
+				<input type="hidden" id="star2_hidden" value="2">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star2" class="star">
+				<input type="hidden" id="star3_hidden" value="3">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star3" class="star">
+				<input type="hidden" id="star4_hidden" value="4">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star4" class="star">
+				<input type="hidden" id="star5_hidden" value="5">
+				<img src="/images/star1.png" onmouseover="change(this.id);" id="star5" class="star">
+			</div>
 
+			<input type="hidden" name="starrating" id="starrating" value="0">
+			<input type="submit" value="Submit" name="submit_rating">
+
+		</form> 
+		<!--
 		<form class="form-group" method="POST" action="/courses/{{$course->id}}/rank">
 
 			{{csrf_field()}}
@@ -37,7 +57,7 @@
 			<input type="submit" name="submit" value="Submit" class="btn btn-primary">
 			
 		</form>
-
+	-->
 		<!-- 
 		<form method="POST" action="/courses/{{$course->id}}/rankL">
 
@@ -53,9 +73,9 @@
 			
 			<button type="submit" name="rank">DisLike</button>
 		</form>
-	 	-->
-		@endif	
-	</div>		
+	-->
+	@endif	
+</div>		
 </div>
 
 <div class="col-md-8">
