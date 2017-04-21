@@ -45,7 +45,7 @@ class CourseController extends Controller
     $course = new Course(request(['url','name']));
  
     auth()->user()->publish($course);
-    insertTags($course,$tags);
+    $course->insertTags($course,$tags);
     
 
     return redirect('/courses');
