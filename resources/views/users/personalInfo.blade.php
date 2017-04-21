@@ -18,6 +18,10 @@
                         <td>{{$user->gender}}</td>
                       </tr>
                       
+                      <tr>
+                      	<td><STRONG>Score:</STRONG></td>
+                        <td>{{$user->user_score}}</td>
+                      </tr>
                      
                     </tbody>
                   </table>

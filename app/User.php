@@ -70,5 +70,11 @@ class User extends Authenticatable
         return null;
     }
 
-    
+    public function addScore()
+    {
+        $score = $this->user_score;
+        $score+= 5;
+        $this->user_score = $score;
+        $this->save();
+    }
 }
