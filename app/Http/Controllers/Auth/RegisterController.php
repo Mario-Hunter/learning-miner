@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Mail\SignUp;
-
+use Carbon;
 class RegisterController extends Controller
 {
     /*
@@ -65,13 +65,13 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
+    {   
+        $date = $data['birthDay']." ".$data['birthMonth']." ".$data['birthYear'];
+        $dob = Carbon\Carbon::parse($date);
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'birthDay'=>$data['birthDay'],
-            'birthMonth'=>$data['birthMonth'],
-            'birthYear'=>$data['birthYear'],
+            'dob' => $dob,
             'gender'=>$data['gender'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

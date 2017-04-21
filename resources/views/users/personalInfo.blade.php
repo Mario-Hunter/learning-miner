@@ -10,7 +10,7 @@
                       </tr>
                       <tr>
                       	<td><STRONG>DOB:</STRONG></td>
-                        <td>{{$user->birthDay}}/{{$user->birthMonth}}/{{$user->birthYear}}</td>
+                        <td>{{ Carbon\Carbon::parse($user->dob)->format('d-F-Y') }}</td>
                       </tr>
 
                       <tr>
