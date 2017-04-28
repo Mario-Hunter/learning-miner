@@ -26,11 +26,7 @@ Route::get('/courses/{course}', 'CourseController@show');
 
 Route::get('/courses/tags/{tag}','TagController@index');
 
-//Route::post('/courses/{course}/rankL', 'RankController@storeL');
-//Route::post('/courses/{course}/rankD', 'RankController@storeD');
-
 Route::post('/courses/{course}/rank', 'RankController@store');
-
 
 Route::post('/search', 'SearchController@set');
 Route::get('/search/{course}', 'SearchController@show');

@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->integer('user_id');
             $table->float('rank')->default(0);
             $table->integer('totalRanks')->default(0);
+            $table->float('searchRank')->default(0);
         });
     }
 

@@ -41,6 +41,7 @@ class Course extends Model
         $this->totalRanks = $rankCourse;
         $this->save();
         $this->averageRank();
+        $this->dynamicRank();
     }
 
     public function averageRank()
@@ -59,6 +60,22 @@ class Course extends Model
         $this->save();
     }
 
+    public function dynamicRank()
+    {
+        $averageRank = $this->rank;
+        $user = $this->user()->get();
+        $sd = $this->standardDeviation();
+        $differenceFactor = $user[0]->user_score - $averageRank;
+        
+        if($differenceFactor < 0)
+            $differenceFactor = 0;
+
+        $searchRank = $averageRank * (1 + ($differenceFactor/($averageRank + 3 * $sd)));
+
+        $this->searchRank = $searchRank;
+        $this->save();
+
+    }
 
     public function user()
     {
@@ -104,18 +121,57 @@ class Course extends Model
             return 3;
     }
 
-    public function insertTags($course,$tags){
-    foreach($tags as $newTag)
+    public function insertTags($course,$tags)
     {
-      $bannedWords= "is in at or on ";
+        foreach($tags as $newTag)
+        {
+          $bannedWords= "is in at or on ";
 
-      if (stripos($bannedWords, $newTag) == 0 && !is_numeric($newTag) )
-      {
-        $tag = Tag::firstOrCreate(['name'=>$newTag]);
-        
-        $course->tags()->syncWithoutDetaching([$tag->id]);
-      }
+          if (stripos($bannedWords, $newTag) == 0 && !is_numeric($newTag) )
+          {
+            $tag = Tag::firstOrCreate(['name'=>$newTag]);
+            
+            $course->tags()->syncWithoutDetaching([$tag->id]);
+          }
+        }
     }
-  }
+
+    public function standardDeviation()
+    {
+        $ranks = $this->rank()->get();
+
+        $r1 = 0;
+        $r2 = 0;
+        $r3 = 0;
+        $r4 = 0;
+        $r5 = 0; 
+
+        $r = 0;
+        
+        foreach ($ranks as $rank) {
+             
+            if($rank->rank == 1)
+                $r1++;
+            else if($rank->rank == 2)
+                $r2++;
+            else if($rank->rank == 3)
+                $r3++;
+            else if($rank->rank == 4)
+                $r4++;
+            else if($rank->rank == 5)
+                $r5++;
+
+            $r++;
+         } 
+
+         $mean = (float)(5*$r5 + 4*$r4 + 3*$r3 + 2*$r2 + 1*$r1)/$r;
+
+
+         $variance = (float)(25*$r5 + 16*$r4 + 9*$r3 + 4*$r2 + 1*$r1)/$r;
+
+         $standardDeviation = sqrt((float)($variance - pow($mean, 2)));
+
+         return $standardDeviation;
+    }
 
 }
