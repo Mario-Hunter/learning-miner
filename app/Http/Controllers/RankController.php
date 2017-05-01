@@ -10,8 +10,6 @@ class RankController extends Controller
 {
 
 
-
-
 	public function store(Course $course)
 	{
 		

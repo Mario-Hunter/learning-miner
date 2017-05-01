@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->hasMany(Rank::class);
     }
 
+    public function interest()
+    {
+        return $this->hasMany(Interest::class);
+    }
+
     public function isRanked(Course $course, $value, User $user)
     {
         
@@ -70,6 +75,16 @@ class User extends Authenticatable
         return null;
     }
 
+    public function checkIfInterestExist(User $user, Course $course)
+    {
+        $interestsArr = $user->interest()->get();
+
+        foreach ($interestsArr as $interest) {
+            if($interest->course_id == $course->id)
+                return true;
+        }
+        return false;
+    }
     public function addScore($value)
     {
         $score = $this->user_score;

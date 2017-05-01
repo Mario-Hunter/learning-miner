@@ -36,46 +36,14 @@
 
 			<input type="hidden" name="starrating" id="rating{{$course->id}}" value="0">
 			<input type="submit" value="Submit" name="submit_rating">
-
 		</form> 
-		<!--
-		<form class="form-group" method="POST" action="/courses/{{$course->id}}/rank">
 
+		<form method="POST" action="/interest/{{$course->id}}">
 			{{csrf_field()}}
-
-			<select name="rank" class="selectpicker form-control" >
-
-				<option value="" disabled selected>How much would you rate it?</option>
-				<option value="1"> 1 </option>
-				<option value="2"> 2 </option>
-				<option value="3"> 3 </option>
-				<option value="4"> 4 </option>
-				<option value="5"> 5 </option>
-				
-			</select>
-			<br>
-			<input type="submit" name="submit" value="Submit" class="btn btn-primary">
-			
+			<button class="btn btn-primary" type="submit">Like</button>
 		</form>
-	-->
-		<!-- 
-		<form method="POST" action="/courses/{{$course->id}}/rankL">
-
-			{{csrf_field()}}
-			
-			<button type="submit" name="rank">Like</button>
-		</form>
-
-
-		<form method="POST" action="/courses/{{$course->id}}/rankD">
-
-			{{csrf_field()}}
-			
-			<button type="submit" name="rank">DisLike</button>
-		</form>
-	-->
-	@endif	
-</div>		
+		@endif	
+	</div>		
 </div>
 
 <div class="col-md-8">

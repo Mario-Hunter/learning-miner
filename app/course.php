@@ -64,13 +64,15 @@ class Course extends Model
     {
         $averageRank = $this->rank;
         $user = $this->user()->get();
-        $sd = $this->standardDeviation();
+        $arrayOfMeanAndSD = $this->standardDeviation();
         $differenceFactor = $user[0]->user_score - $averageRank;
         
-        if($differenceFactor < 0)
-            $differenceFactor = 0;
-
-        $searchRank = $averageRank * (1 + ($differenceFactor/($averageRank + 3 * $sd)));
+        $mean = $arrayOfMeanAndSD[0][0];
+        $sd = $arrayOfMeanAndSD[0][1];
+        
+        if($sd == 0)
+            $sd = 1;
+        $searchRank = $averageRank * ($user[0]->user_score - $mean) / $sd;
 
         $this->searchRank = $searchRank;
         $this->save();
@@ -91,6 +93,11 @@ class Course extends Model
         return $this->hasMany(Rank::class);
     }
 
+    public function interest()
+    {
+        return $this->hasMany(Interest::class);
+    }
+    
     public function buttonCases()
     {
         $idPrev = $this->id;
@@ -170,8 +177,8 @@ class Course extends Model
          $variance = (float)(25*$r5 + 16*$r4 + 9*$r3 + 4*$r2 + 1*$r1)/$r;
 
          $standardDeviation = sqrt((float)($variance - pow($mean, 2)));
-
-         return $standardDeviation;
+         $arrayOfMeanAndSD[] = array($mean, $standardDeviation);
+         return $arrayOfMeanAndSD;
     }
 
 }
