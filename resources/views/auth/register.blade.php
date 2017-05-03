@@ -82,7 +82,7 @@
                                     <select id="birthMonth" class="form-control" type="Date" name="birthMonth">
                                         <option> - Month - </option>
                                         <option value="January">January</option>
-                                        <option value="Febuary">Febuary</option>
+                                        <option value="February">February</option>
                                         <option value="March">March</option>
                                         <option value="April">April</option>
                                         <option value="May">May</option>

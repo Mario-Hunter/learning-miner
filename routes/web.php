@@ -14,7 +14,10 @@
 Route::get('/', function () {
     return redirect('/courses');
 });
-
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'Auth\RegisterController@confirm'
+]);
 Auth::routes();
 
 Route::get('/home/{user}', 'HomeController@index');

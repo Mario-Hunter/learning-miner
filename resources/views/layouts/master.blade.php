@@ -42,6 +42,14 @@
 
   @include('layouts.nav')
 
+  @if($flash = session('message'))
+    <div id ="flash-message" class="alert alert-success" role="alert">
+            
+        {{session('message')}}
+        
+    </div>  
+    @endif
+    
   <div class="container" style="height:500px;">
     @yield('content')
   </div>

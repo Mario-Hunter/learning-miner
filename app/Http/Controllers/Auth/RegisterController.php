@@ -67,7 +67,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {   
         $date = $data['birthDay']." ".$data['birthMonth']." ".$data['birthYear'];
+        //dd($date);
         $dob = Carbon\Carbon::parse($date);
+        $confirmation_code = str_random(30);
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -75,8 +77,36 @@ class RegisterController extends Controller
             'gender'=>$data['gender'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'confirmation_code' => $confirmation_code,
         ]);
+        //dd($confirmation_code);
         \Mail::to($user)->send(new SignUp($user));
+        session()->flash('message','Thanks for signing up! Please check your email.');
+        
         return $user;
+    }
+
+     public function confirm($confirmationCode)
+    {
+        if( ! $confirmationCode)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user = User::whereConfirmationCode($confirmationCode)->first();
+
+        if ( ! $user)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+        session()->flash('message','You have successfully verified your account.');
+
+
+        return redirect('/login');
     }
 }

@@ -22,6 +22,9 @@ class CreateCoursesTable extends Migration
             $table->float('rank')->default(0);
             $table->integer('totalRanks')->default(0);
             $table->float('searchRank')->default(0);
+            $table->string('title')->nullable();
+            $table->string('image_url')->nullable();
+            $table->string('description')->nullable();
         });
     }
 

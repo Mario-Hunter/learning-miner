@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Events\CommentCreated;
+use Illuminate\Support\Facades\Auth;
+
 
 class Course extends Model
 {
-    protected $fillable = ['url','tags','name'];
+    protected $fillable = ['url','tags','name','title','description','image_url'];
 
 
     public function comments()
@@ -16,20 +19,23 @@ class Course extends Model
 
     public function addComent($body)
     {
-    	$this->comments()->create([
-                                    'body' => $body,
-                                    'course_id'=>$this->id,
-                                    'user_id'=>auth()->id()
-                                    ]);
+        $comment = Comment::create(['body' => $body,
+            'course_id'=>$this->id,
+            'user_id'=>auth()->id()
+            ]);
+        $this->comments()->save($comment);
+        if(Auth::user() != $comment->course->user){
+            event(new CommentCreated($comment));
+        }
     }
 
     public function addRank($value)
     {
-        
+
         $this->rank()->create([
-                    'rank' => $value,
-                    'course_id' => $this->id,
-                    'user_id' => auth()->id()
+            'rank' => $value,
+            'course_id' => $this->id,
+            'user_id' => auth()->id()
             ]);
         $this->totalRankModifier($value);
     }
@@ -139,46 +145,46 @@ class Course extends Model
             $tag = Tag::firstOrCreate(['name'=>$newTag]);
             
             $course->tags()->syncWithoutDetaching([$tag->id]);
-          }
         }
     }
+}
 
-    public function standardDeviation()
-    {
-        $ranks = $this->rank()->get();
+public function standardDeviation()
+{
+    $ranks = $this->rank()->get();
 
-        $r1 = 0;
-        $r2 = 0;
-        $r3 = 0;
-        $r4 = 0;
-        $r5 = 0; 
+    $r1 = 0;
+    $r2 = 0;
+    $r3 = 0;
+    $r4 = 0;
+    $r5 = 0; 
 
-        $r = 0;
-        
-        foreach ($ranks as $rank) {
-             
-            if($rank->rank == 1)
-                $r1++;
-            else if($rank->rank == 2)
-                $r2++;
-            else if($rank->rank == 3)
-                $r3++;
-            else if($rank->rank == 4)
-                $r4++;
-            else if($rank->rank == 5)
-                $r5++;
+    $r = 0;
 
-            $r++;
-         } 
+    foreach ($ranks as $rank) {
 
-         $mean = (float)(5*$r5 + 4*$r4 + 3*$r3 + 2*$r2 + 1*$r1)/$r;
+        if($rank->rank == 1)
+            $r1++;
+        else if($rank->rank == 2)
+            $r2++;
+        else if($rank->rank == 3)
+            $r3++;
+        else if($rank->rank == 4)
+            $r4++;
+        else if($rank->rank == 5)
+            $r5++;
+
+        $r++;
+    } 
+
+    $mean = (float)(5*$r5 + 4*$r4 + 3*$r3 + 2*$r2 + 1*$r1)/$r;
 
 
-         $variance = (float)(25*$r5 + 16*$r4 + 9*$r3 + 4*$r2 + 1*$r1)/$r;
+    $variance = (float)(25*$r5 + 16*$r4 + 9*$r3 + 4*$r2 + 1*$r1)/$r;
 
-         $standardDeviation = sqrt((float)($variance - pow($mean, 2)));
-         $arrayOfMeanAndSD[] = array($mean, $standardDeviation);
-         return $arrayOfMeanAndSD;
-    }
+    $standardDeviation = sqrt((float)($variance - pow($mean, 2)));
+    $arrayOfMeanAndSD[] = array($mean, $standardDeviation);
+    return $arrayOfMeanAndSD;
+}
 
 }

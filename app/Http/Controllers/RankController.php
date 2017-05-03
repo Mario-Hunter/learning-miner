@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Rank;
 use App\Course;
+use App\Events\RankCreated;
 class RankController extends Controller
 {
 
@@ -36,6 +37,7 @@ class RankController extends Controller
 			$userToBeRanked[0]->save();
 
 		}
+		event(new RankCreated($course,$newRank,$user));
 
 		return redirect('/courses'."/$course->id");
 	}

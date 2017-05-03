@@ -4,16 +4,37 @@
 	<p class="blog-course-meta">{{$course->created_at->toFormattedDateString()}}, by <a href="/users/{{$course ->user->id}}" >{{$course->user->first_name}}{{' '}}{{$course->user->last_name}}</a></p>
 
 	<a id="livePrev" href = {{$course->url}} > {{$course->url}}</a><div class="box"><iframe src="https://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div>
-	<p class="blog-course-meta" >
+
+	<div class="form-control">
+		@if($course->image_url != null)
+		<div class = "container card-block">
+			<a href  = {{ $course ->url}} >
+				<img height="500" width="600" src={{$course->image_url}} > 
+			</a>
+		</div>
+		<hr>
+		@endif
+		@if( $course-> title != null || $course ->description != null)
+		<div class = "container card-block">
+			@if($course->title != null)
+			<p> {{$course->title}}</p>
+			<hr>
+			@endif
+			@if($course->description != null)
+			<p> {{$course->description}} </p>
+			@endif
+		</div>
+		<hr>
+		@endif
+		<p class="blog-course-meta" >
+		tags: 
 		@foreach($course->tags()->get() as $tag)
 
 		<a href="/courses/tags/{{$tag->name}}"> {{$tag->name}}</a>
 		@endforeach
 	</p>
-
-
-	<div class="form-control"> 
-		<div class="container card-block">
+	<hr>
+	<div class="container card-block">
 			This course is rated as: &nbsp; {{ $course->rank }}
 		</div>
 		<hr>
@@ -42,8 +63,12 @@
 			{{csrf_field()}}
 			<button class="btn btn-primary" type="submit">Like</button>
 		</form>
-		@endif	
-	</div>		
+		@endif
+	</div>
+	
+
+
+		
 </div>
 
 <div class="col-md-8">
