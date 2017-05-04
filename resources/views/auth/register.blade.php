@@ -15,7 +15,7 @@
                             <label for="first_name" class="col-md-4 control-label offset-md-3">First Name</label>
 
                             <div class="col-md-6 offset-md-3">
-                                <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                                <input id="first_name" type="text" class="form-control" name="first_name" @if(isset($data))value="{{ $data['first_name']  }}"@endif required autofocus>
 
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -29,7 +29,7 @@
                             <label for="last_name" class="col-md-4 control-label offset-md-3">Last Name</label>
 
                             <div class="col-md-6 offset-md-3">
-                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autofocus>
+                                <input id="last_name" type="text" class="form-control" name="last_name" @if(isset($data))value="{{ $data['last_name']  }}"@endif required autofocus>
 
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -189,7 +189,7 @@
                             <label for="email" class="col-md-4 control-label offset-md-3">E-Mail Address</label>
 
                             <div class="col-md-6 offset-md-3">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" @if(isset($data))value="{{ $data['email']  }}"@endif required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">

@@ -19,11 +19,15 @@ Route::get('register/verify/{confirmationCode}', [
     'uses' => 'Auth\RegisterController@confirm'
 ]);
 Auth::routes();
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
 
 Route::get('/home/{user}', 'HomeController@index');
 
 Route::get('/courses', 'CourseController@index');
 Route::post('/courses', 'CourseController@store');
+Route::get('/courses/page/{page}', 'CourseController@indexPage');
+
 Route::get('/courses/create', 'CourseController@create');
 Route::get('/courses/{course}', 'CourseController@show');
 

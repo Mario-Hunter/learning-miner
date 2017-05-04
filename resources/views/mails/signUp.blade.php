@@ -4,7 +4,7 @@
 Here You will find all the educational sources you need to push your limits to be someone amazing.
 
 @component('mail::button', ['url' => URL::to('register/verify/' .$user-> confirmation_code)  ])
-Verify,helo
+Verify
 @endcomponent
 
 Thanks,<br>

@@ -29,10 +29,28 @@ class CourseController extends Controller
       session()->flash('message','Your e-mail has not been verified yet. Please verify it then log in.');
       redirect('/courses');
     }
-    $courses = Course::latest()->get();
+    $courses = Course::latest()->take(10)->offset($page*10)->get();
 
     return view('courses.index',compact('courses'));
   }
+
+  
+  public function indexPage($page)
+  {
+    $user = auth()->user();
+
+    if( $user && $user -> confirmed == '0'){
+      Auth::logout();
+      session()->flash('message','Your e-mail has not been verified yet. Please verify it then log in.');
+      redirect('/courses');
+    }
+
+
+    $courses = Course::latest()->take(10)->offset($page*10)->get();
+
+    return view('courses.index',compact('courses'));
+  }
+
 
   public function create()
   {

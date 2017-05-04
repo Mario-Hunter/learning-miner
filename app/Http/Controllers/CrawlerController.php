@@ -54,12 +54,27 @@ class CrawlerController extends Controller
 		for ($i = 0; $i < count($urls); ++$i) {
 			$metaCrawler = $client -> request('GET',"https://www.".$domain.$urls[$i]);
 			
+			try {
+				$title = $metaCrawler->filter('meta[property="og:title"]')->attr('content');
+			} catch (\InvalidArgumentException $e) {
+				$title = null;
+			}
+			try {
+				$image_url = $metaCrawler->filter('meta[property="og:image"]')->attr('content');
+			} catch (\InvalidArgumentException $e) {
+				$image_url = null;
+			}
+			try {
+				$description = substr($metaCrawler->filter('meta[property="og:description"]')->attr('content'),0,189)."..";
+			} catch (\InvalidArgumentException $e) {
+				$description = null;
+			}
 			$data = [
 			'url'=>"https://www.".$domain.$urls[$i],
 			'name'=>$titles[$i],
-			'title' => $metaCrawler->filter('meta[property="og:title"]')->attr('content'),
-			'description' => substr($metaCrawler->filter('meta[property="og:description"]')->attr('content'),0,498),
-			'image_url' => $metaCrawler->filter('meta[property="og:image"]')->attr('content'),
+			'title' => $title,
+			'description' => $description,
+			'image_url' => $image_url,
 			];
 			$admin  = User::find(1);
 			Auth::login($admin);
