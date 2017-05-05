@@ -29,7 +29,7 @@ class CourseController extends Controller
       session()->flash('message','Your e-mail has not been verified yet. Please verify it then log in.');
       redirect('/courses');
     }
-    $courses = Course::latest()->take(10)->offset($page*10)->get();
+    $courses = Course::latest()->take(10)->get();
 
     return view('courses.index',compact('courses'));
   }
