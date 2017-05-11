@@ -7,6 +7,7 @@ use App\Course;
 use App\Auth;
 use App\User;
 use App\Interest;
+use App\ActivityLog;
 
 class InterestController extends Controller
 {
@@ -24,6 +25,12 @@ class InterestController extends Controller
 			$entry->interest = 1;
 			$entry->save();
 		}
+		$log = ActivityLog::create(['user_id'=>$user->id,
+            'course_id'=>$course->id,
+            'action_type'=>"interest",
+            'action_body'=>"1"
+            ]);
+        
 
 		return redirect('/courses');
 	}
