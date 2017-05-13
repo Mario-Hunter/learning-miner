@@ -38,7 +38,6 @@ class NotifyCommentUser
             'action_type'=>"comment",
             'action_body'=>$comment->body
             ]);
-        dd($log);
         
 
         \Mail::to($user_commented_on)->send(new CommentNotification($comment));
