@@ -6,6 +6,7 @@ use App\Events\CommentCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Mail\CommentNotification;
+use App\ActivityLog;
 
 class NotifyCommentUser
 {
@@ -23,13 +24,22 @@ class NotifyCommentUser
      * Handle the event.
      *
      * @param  CommentCreated  $event
-     * @return void
+     * @return voids
      */
     public function handle(CommentCreated $event)
     {
+
         $comment = $event->comment;
         $course = $comment->course;
         $user_commented_on = $course->user;
+        $user_commenting=$comment->user;
+        $log = ActivityLog::create(['user_id'=>$user_commenting->id,
+            'course_id'=>$course->id,
+            'action_type'=>"comment",
+            'action_body'=>$comment->body
+            ]);
+        
+
         \Mail::to($user_commented_on)->send(new CommentNotification($comment));
     }
 }
