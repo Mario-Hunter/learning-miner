@@ -19,7 +19,7 @@ class CreateRanksTable extends Migration
             $table->integer('rank');
             $table->integer('course_id');
             $table->integer('user_id');
-            
+            $table->float('effectScore')->default(0);            
         });
     }
 

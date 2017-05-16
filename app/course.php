@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Events\CommentCreated;
 use Illuminate\Support\Facades\Auth;
-
+use App\User;
 
 class Course extends Model
 {
@@ -70,19 +70,23 @@ class Course extends Model
     {
         $averageRank = $this->rank;
         $user = $this->user()->get();
+        $rank = auth()->user()->rankValue($this,auth()->user());
+
         $arrayOfMeanAndSD = $this->standardDeviation();
-        $differenceFactor = $user[0]->user_score - $averageRank;
-        
         $mean = $arrayOfMeanAndSD[0][0];
         $sd = $arrayOfMeanAndSD[0][1];
         
         if($sd == 0)
             $sd = 1;
-        $searchRank = $averageRank * ($user[0]->user_score - $mean) / $sd;
 
+        $oldEffectRank = $rank['effectScore'];
+        $newEffectRank = auth()->user()->user_score * ($rank['rank'] - $mean) / $sd;
+        $searchRank = $this->searchRank;
+        $searchRank += $newEffectRank - $oldEffectRank;
+        $rank['effectScore'] = $newEffectRank;
         $this->searchRank = $searchRank;
         $this->save();
-
+        $rank->save();
     }
 
     public function user()
@@ -180,9 +184,9 @@ public function standardDeviation()
     $mean = (float)(5*$r5 + 4*$r4 + 3*$r3 + 2*$r2 + 1*$r1)/$r;
 
 
-    $variance = (float)(25*$r5 + 16*$r4 + 9*$r3 + 4*$r2 + 1*$r1)/$r;
+    $meanSquared = (float)(25*$r5 + 16*$r4 + 9*$r3 + 4*$r2 + 1*$r1)/$r;
 
-    $standardDeviation = sqrt((float)($variance - pow($mean, 2)));
+    $standardDeviation = sqrt((float)($meanSquared - pow($mean, 2)));
     $arrayOfMeanAndSD[] = array($mean, $standardDeviation);
     return $arrayOfMeanAndSD;
 }
