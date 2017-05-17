@@ -12,7 +12,7 @@
   <link href="https://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css"></link>
 
   <!-- Custom styles for this template -->
-  <link href="/css/miner.css" rel="stylesheet">
+ <link href="/css/miner.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href=" /css/ratings.css">
   <link rel="stylesheet" type="text/css" href=" /css/LivePreview.css">
@@ -38,7 +38,7 @@
 
 </head>
 
-<body background="wood.jpg">
+<body class = "home">
 
   @include('layouts.nav')
 

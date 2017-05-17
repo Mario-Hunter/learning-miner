@@ -7,6 +7,7 @@
     <title>E-Miner</title>
     
     <style type="text/css">
+    <!--
 		.button1
         {
           background : #8B71B5;
@@ -16,7 +17,7 @@
           top : 32%;
           width : 259px;
           height : 54px;
-          
+          border: 3px solid #FFFFFF; 
         }
         .button2
         {
@@ -27,7 +28,7 @@
           top : 32%;
           width : 259px;
           height : 54px;
-          
+          border: 3px solid #FFFFFF; 
 
         }
 		.button3
@@ -53,12 +54,11 @@
 		  position:absolute;
    		  bottom:0;
    		  width:100%;
-   		  height:230px; 
-            padding: 0;
+   		  height:230px;     
         }
         .Slogantext
         {
-          position: fixed;
+          position: relative;
           font-family : "Comic Sans MS", cursive, sans-serif;
           font-size : 32px;
           line-height : 27.46px;
@@ -68,7 +68,6 @@
           color : rgb(230, 106, 120);
           left : 330px;
           top : 450px;
-            width : 50%
         }
         
         .infotext
@@ -91,7 +90,7 @@
         }
         .icon
         {
-         background-image : url(/images/icoon.png);
+         background-image : url(../../public/images/icoon.png);
           background-size: cover;
           outline: none;
           background-repeat : no-repeat;
@@ -100,13 +99,12 @@
           width : 813px;
           height : 533px;
         }
-        body.home 
+        body 
         {
-                margin-left: 0px;
-
-            background-image:url('/images/backHome.jpg');
+            
+            background-image:url('../../public/images/backHome.jpg');
 			 background-repeat:no-repeat;
-            background-size:1600px 780px;
+            background-size:cover;
         }
 		a.link {font-family: "Comic Sans MS", Helvetica, sans-serif;}
 		input[type=button]{
@@ -118,14 +116,10 @@
     </head>
   <div class = "icon" alt="" title="" ></div>
   <div class = "Slogantext" alt="" title="" >"----Slogan----"</div>
-  <body class="home">
+  <body>
   <div class = "signuploginhome" alt="" title="" >
-      <a href="/login">
   	   <input type="button" class="button1" value="Sign in">
-      </a>
-      <a href="/register">
-  	   	   <input type="button" class="button2" value="Sign up">
-      </a>
+	   <input type="button" class="button2" value="Sign up">
 	   <a href="https://www.google.com"  class="button3">Continue as guest</a>
   </div>
 

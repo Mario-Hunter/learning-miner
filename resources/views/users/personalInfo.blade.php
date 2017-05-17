@@ -1,42 +1,45 @@
-<div class="blog-course col-md-4">
-	<img src="{{$user->avatar}}" style="width: 150px; height:150px; float:left; border-radius:100%; margin-right: 25px; ">
-	<h2 class="blog-course-title">{{$user->first_name}}{{' '}}{{$user->last_name}}</h2>
-	<form enctype="multipart/form-data" action="/userInfo/{{$user->id}}" method="POST">
-		<label>Update Profile Image</label>
-			<input type="file" name="avatar">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="submit" class="pull-right btn btn-sm btn-primary">
-	</form>
-	
 
-	<table class="table table-user-information">
+<body class="profile">
+  <div class = "usernametext" >{{$user->first_name}}{{' '}}{{$user->last_name}}</div>
+  <object data="/images/purpleBack" type="image/jpg" class="userphoto">
+    <img src={{$user->avatar}}/>
+  </object>
+
+<img class="eminerPhoto" src="/images/BoldLogo.jpg"> 
+
+	 <table class= "userdata ">
                     <tbody>
                       <tr>
-                      	<td><STRONG>UserEmail:</STRONG></td>
-                        <td>{{$user->email}}</td>
+                      	<td><STRONG>UserEmail:&nbsp;</STRONG><br/></td>
+                        <td>{{$user->email}} <br/></td>
+						 
                       </tr>
+					 <br/>
                       <tr>
-                      	<td><STRONG>DOB:</STRONG></td>
-                        <td>{{ Carbon\Carbon::parse($user->dob)->format('d-F-Y') }}</td>
+                      	<td><STRONG>DOB:&nbsp;</STRONG> <br/></td>
+                        <td>{{ Carbon\Carbon::parse($user->dob)->format('d-F-Y') }} <br/></td>
+					 
                       </tr>
-
+                        <br/>
+          			        <tr>
+                      	<td><STRONG>Gender  :&nbsp;</STRONG> <br/></td>
+                        <td>{{$user->gender}} <br/></td>
+					 
+                      </tr>
+                     <br/>
                       <tr>
-                      	<td><STRONG>Gender:</STRONG></td>
-                        <td>{{$user->gender}}</td>
+                      	<td><STRONG>Score    :&nbsp;</STRONG> <br/></td>
+                        <td>{{$user->user_score}} <br/></td>
                       </tr>
-                      
-                      <tr>
-                      	<td><STRONG>Score:</STRONG></td>
-                        <td>{{$user->user_score}}</td>
-                      </tr>
-                     
+         
                     </tbody>
-                  </table>
-	<hr>
+       </table>
+	   <button class="changePicturebutton">CHANGE PHOTO&nbsp;&nbsp;</button>
+ </body>
 
 	@foreach($user->courses as $course)
 
-		<li class="list-group-item">
+		<!--<li class="list-group-item">
 		<strong>
 
 			<h2 class="blog-course-title"><a href = "/courses/{{$course ->id}}">{{$course->name}}</a></h2>
@@ -54,11 +57,6 @@
 			@endforeach
 			</strong>
 			
-		</li>
+		</li>-->
 		
 		@endforeach
-
-	</p>
-
-<hr>
-<br>

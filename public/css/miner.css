@@ -1,8 +1,97 @@
-body {
-    background-image: url(../images/trial6.jpg);
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+body.home {
+    background-image: url(/images/backHome.jpg);
     padding-top: 5rem;
+    background-repeat: repeat-y;
+    background-size:cover;
 }
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: left;
+}
+.tempPic {
+     background-image: url(/images/back.jpg);
+}
+body.profile {
+      color:#000000;
+      background-color:#FFFFFF;
+      background-image:url('/images/back.jpg');
+      background-repeat:no-repeat;
+	   background-size : 1600px 780px;
+       outline: none;
+    }
+	
+.usernametext
+{
+position : absolute ;
+  left : 670px;
+  top : 350px;
+  width : 400px;
+  height : 300px;
+  font-family : AvantGarde-Demi; 
+  font-family: "Comic Sans MS", Helvetica, sans-serif;
+  font-size : 42px;
+  font-weight:lighter;
+  color : #E96C79;
+  color : rgb(233, 108, 121);
+}
+.changePicturebutton
+{
+  position : absolute ;
+  left : 420px;
+  top : 635px;
+  width : 210px;
+  height : 40px;
+  background-color: #8C71B6;
+  font-family : "Trebuchet MS", Helvetica, sans-serif;
+  font-size : 18px;
+  font-weight:400;
+  text-align:right;
+  color : #EDC951;
+  color : rgb(237, 201, 81);
+  background-image: url('/images/ChangeIcon.jpg');
+  background-position: 8px -1px;
+  background-repeat: no-repeat;
+}
+.userdata
+{
+  font-family :"Trebuchet MS", Helvetica, sans-serif;
+  font-size : 28px;
+  position : absolute ;
+    width: 100px;
+  left : 670px;
+  top : 430px;
+  color : #FFFFFF;
+  color : rgb(255, 255, 255);
+}
+br {
+
+  line-height:1.5em;/* chrome for instance */
+}
+.userphoto
+{
+  background : #8B71B5;
+  background : rgba(139, 113, 181, 1);
+  position : absolute ;
+  left : 420px;
+  top : 350px;
+  width : 210px;
+  height : 279px;
+}
+.eminerPhoto
+{
+ background-image:url('/images/icoon.png');
+ position : absolute ;
+  left : 610px;
+  top : 80px;
+  width : 370px;
+  height : 220px;
+
 }

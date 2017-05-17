@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/courses');
+    return view('/welcome');
 });
 
 Route::get('register/verify/{confirmationCode}', [

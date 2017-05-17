@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-<div class="container">
+<div>
 	<div class="row">
 		@include('users.personalInfo')
 	</div>

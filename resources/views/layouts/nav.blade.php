@@ -64,7 +64,7 @@
          
           <a class="nav-link" href="/interests/courses" >My Courses</a>
 
-          <li class="nav-item active">
+          <li class="nav-item">
          
         <a class="nav-link" href="/userInfo/{{auth()->user()->id}}">My Info</a>
          
