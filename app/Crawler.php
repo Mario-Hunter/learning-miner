@@ -35,18 +35,21 @@ class Crawler extends Model
 		$decoded=json_decode($json,true);
 		$courses = $decoded['courses'];
 		$admin  = User::find(2);
+
 		foreach($courses as $course){
-			if(count(course::where('url',$course['homepage'])->get()) == 0){
+			
+			
+			if($course['homepage'] != null && count(course::where('url',$course['homepage'])->get()) == 0){
 				$description =$course['summary'];
 				$data = [
 				'url'=>$course['homepage'],
 				'name'=>	$course['title'],
 				'title' => $course['subtitle'],
-				'description' => preg_replace('/[^A-Za-z0-9\-]/', '', substr($description,0,190)),
+				'description' => preg_replace('/[^A-Za-z0-9\-\s\r\n\.]/', '', substr($description,0,190)),
 				'image_url' => $course['image'],
 				];
 				echo $data['url']."\r\n";
-				//echo $data['description']."\r\n";
+				echo $data['description']."\r\n";
 				$tags= $course['tracks'];
 				$courseModel = new Course($data);
 				$admin->publish($courseModel);
