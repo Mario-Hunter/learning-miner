@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
 			}else{
 			$user = $service->createOrGetUser(Socialite::driver($provider)->fields([
 				'first_name', 'last_name', 'email', 'gender', 'birthday','verified'
-				])->user());
+				]));
 			
 			
 			}
