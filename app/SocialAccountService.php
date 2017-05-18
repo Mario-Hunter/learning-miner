@@ -11,7 +11,6 @@ class SocialAccountService
     {
         $providerUser = $provider->user();
         $providerName = class_basename($provider);
-
         $account = SocialAccount::whereProvider($providerName)
             ->whereProviderUserId($providerUser->getId())
             ->first();
@@ -43,7 +42,8 @@ class SocialAccountService
     }
 
     public function getData($provider,$providerUser){
-        if($provider == 'facebook'){
+        if($provider == 'FacebookProvider'){
+
             if ($providerUser->user['verified'] == true){
                     $confirmed =1;
                 }else{
