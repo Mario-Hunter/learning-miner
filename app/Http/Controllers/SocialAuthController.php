@@ -11,6 +11,9 @@ class SocialAuthController extends Controller
 {
 	public function redirect($provider)
 	{
+		if($provider == 'google'){
+			return Socialite::driver('google')->redirect();
+		}
 		return Socialite::driver($provider)->fields([
 			'first_name', 'last_name', 'email', 'gender', 'birthday'
 			])->scopes([
