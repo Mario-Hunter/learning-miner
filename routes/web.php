@@ -22,8 +22,15 @@ Route::get('register/verify/{confirmationCode}', [
 
 Auth::routes();
 
-Route::get('/redirect', 'SocialAuthController@redirect');
-Route::get('/callback', 'SocialAuthController@callback');
+Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
+Route::get('/callback/{provider}', 'SocialAuthController@callback');
+
+Route::get('/redirect/google', 'SocialAuthController@gredirect');
+Route::get('/callback/google', 'SocialAuthController@gcallback');
+
+
+
+
 
 Route::get('/home/{user}', 'HomeController@index');
 

@@ -9,27 +9,52 @@ use App\Http\Controllers\Controller;
 
 class SocialAuthController extends Controller
 {
-	public function redirect()
+	public function redirect($provider)
 	{
-		return Socialite::driver('facebook')->fields([
+		return Socialite::driver($provider)->fields([
 			'first_name', 'last_name', 'email', 'gender', 'birthday'
 			])->scopes([
 			'email', 'user_birthday'
 			])->redirect();   
 		}   
 
-		public function callback(SocialAccountService $service,Request $request)
+		public function callback(SocialAccountService $service,Request $request,$provider)
 		{
 			$state = $request->get('state');
 			$request->session()->put('state',$state);
 			session()->regenerate();
-
-			$user = $service->createOrGetUser(Socialite::driver('facebook')->fields([
+			if (class_basename($provider) == 'google'){
+				$user = $service->createOrGetUser(Socialite::driver($provider));
+			}else{
+			$user = $service->createOrGetUser(Socialite::driver($provider)->fields([
 				'first_name', 'last_name', 'email', 'gender', 'birthday','verified'
 				])->user());
 			
-			auth()->login($user);
 			
+			}
+			auth()->login($user);
+			return redirect()->to('/courses');
+		}
+
+		public function gredirect()
+		{
+			return Socialite::driver('google')->redirect();   
+		}   
+
+		public function gcallback(SocialAccountService $service,Request $request)
+		{
+			 $state = $request->get('state');
+			 $request->session()->put('state',$state);
+			session()->regenerate();
+
+			// $user = $service->createOrGetUser(Socialite::driver('facebook')->fields([
+			// 	'first_name', 'last_name', 'email', 'gender', 'birthday','verified'
+			// 	])->user());
+			
+			// auth()->login($user);
+			$user = $service->createOrGetUser(Socialite::driver('google')->user());
+			auth()->login($user);
+			//dd($user);
 			return redirect()->to('/courses');
 		}
 
