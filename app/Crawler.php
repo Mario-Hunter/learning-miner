@@ -9,6 +9,8 @@ use App\User;
 use App\course;
 use App\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class Crawler extends Model
 {
@@ -34,18 +36,22 @@ class Crawler extends Model
 		$courses = $decoded['courses'];
 		$admin  = User::find(2);
 		foreach($courses as $course){
-			$data = [
-			'url'=>$course['homepage'],
-			'name'=>	$course['title'],
-			'title' => $course['subtitle'],
-			'description' => substr($course['summary'],0,140),
-			'image_url' => $course['image'],
-			];
-			echo $data['description'];
-			$tags= $course['tracks'];
-			$courseModel = new Course($data);
-			$admin->publish($courseModel);
-			$courseModel->insertTags($courseModel,$tags);
+			if(count(course::where('url',$course['homepage'])->get()) == 0){
+				$description =$course['summary'];
+				$data = [
+				'url'=>$course['homepage'],
+				'name'=>	$course['title'],
+				'title' => $course['subtitle'],
+				'description' => preg_replace('/[^A-Za-z0-9\-]/', '', substr($description,0,190)),
+				'image_url' => $course['image'],
+				];
+				echo $data['url']."\r\n";
+				//echo $data['description']."\r\n";
+				$tags= $course['tracks'];
+				$courseModel = new Course($data);
+				$admin->publish($courseModel);
+				$courseModel->insertTags($courseModel,$tags);
+			}
 		}
 
 	}
