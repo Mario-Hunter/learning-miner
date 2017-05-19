@@ -3,26 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
+use Auth;
+use App\follower;
 
 class FollowerController extends Controller
 {
-    public function follow(User $followedUser)
+    public function follow(User $user)
     {
-    	$user = auth()->user();
-    	$entry = $user->checkIffollowerExist($user,$followedUser);
+       	$followingUser = auth()->user();
     	$followers = DB::table('followers')
     	->where('user_id', '=', Auth::user()->id)
-    	->where('user_followed_id', '=', $followedUser->id)
+    	->where('user_followed_id', '=', $user->id)
     	->first();
     	if (is_null($followers)) {
     		$newFollower=follower::create([
-    			'user_id'=>$user->id,
-    			'user_followed_id'=>$followedUser->id
+    			'user_id'=>$followingUser->id,
+    			'user_followed_id'=>$user->id
     			]);
+
 		}	
-	 	else {
-	 		
-		}
+	 	else {}
+		return view('users.show', compact('user'));
     }
 }

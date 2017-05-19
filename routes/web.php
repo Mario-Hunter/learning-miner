@@ -60,4 +60,5 @@ Route::get('/interests/courses','InterestController@index');
 
 
 Route::get('crawl/{query}','CrawlerController@crawl');
+Route::post('/follow/{user}','FollowerController@follow');
 
