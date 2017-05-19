@@ -26,7 +26,9 @@ class Crawler extends Model
 		$this->to_crawl[$url] = 0;
 
 	}
-
+	public function mysql_clean($string){
+		return preg_replace('/[^A-Za-z0-9\-\s\r\n\.]/', '', substr($string,0,190));
+	}
 	public function udacityCrawler(){
 		$client = new Client();
 		$crawler = $client -> request('GET','https://www.udacity.com/public-api/v0/courses');
@@ -45,7 +47,7 @@ class Crawler extends Model
 				'url'=>$course['homepage'],
 				'name'=>	$course['title'],
 				'title' => $course['subtitle'],
-				'description' => preg_replace('/[^A-Za-z0-9\-\s\r\n\.]/', '', substr($description,0,190)),
+				'description' => $this->mysql_clean($description),
 				'image_url' => $course['image'],
 				];
 				echo $data['url']."\r\n";
@@ -59,33 +61,64 @@ class Crawler extends Model
 
 	}
 	public function edxCrawler(){
-		$this-> edxCrawl('https://courses.edx.org/api/courses/v1/courses/');
-	}
-	public function edxCrawl($seed){
+		$client_ID = "OgHU5GM9WDpZBBNl7HsnxWIakF2kUe8tAS1Fxbuy";
+		$client_secret ="4nBXEuren8vq2IcE8GNDEm5yN0Dzt18LqnLYQmcRuRqBo1nBhI5M8PFV7neGFLDWKkBRkhKH0hVgZoaJ2LC6FTsJ8Ewj1oHESNFj1Nkw92yJilITlSCDd3tqd3ase2Hc";
+		$param = "grant_type=client_credentials&client_id="+$client_ID+"&client_secret="+$client_secret+"&token_type=jwt";
+		$param ="grant_type=client_credentials&client_id=OgHU5GM9WDpZBBNl7HsnxWIakF2kUe8tAS1Fxbuy&client_secret=4nBXEuren8vq2IcE8GNDEm5yN0Dzt18LqnLYQmcRuRqBo1nBhI5M8PFV7neGFLDWKkBRkhKH0hVgZoaJ2LC6FTsJ8Ewj1oHESNFj1Nkw92yJilITlSCDd3tqd3ase2Hc&token_type=jwt";
 		$client = new Client();
-		$crawler = $client -> request('GET',$seed);
+		$crawler = $client -> request('POST',"https://api.edx.org/oauth2/v1/access_token",[],[], ['HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded'],$param);
 		$response = $client->getResponse();
 		$json = $response->getContent();
 
 		$decoded=json_decode($json,true);
-		$next = $decoded['pagination']['next'];
-		
+		$access_token= $decoded['access_token'];
+// 		$client = new Client('https://api.edx.org/catalog/v1/catalogs/', array(
+//     'request.options' => array(
+//         'headers' => array('Authorization' => "JWT ".$access_token),
+//     )
+// ));
+		$client->setHeader("Authorization", "JWT ".$access_token);
+		$this->edxCrawl($client,"https://api.edx.org/catalog/v1/catalogs/129/courses");
+		 //$client -> request("GET","https://api.edx.org/catalog/v1/catalogs/129/courses");
+		 //$response = $client->getResponse();
+		 //$json = $response->getContent();
+		// echo $json;
+		// $decoded=json_decode($json,true);
+		// $results =$decoded['results'];
+		// echo $decoded['count']."\r\n";
+	}
+
+	public function edxCrawl($client,$seed){
+		$crawler = $client -> request('GET',$seed);
+		$response = $client->getResponse();
+		$json = $response->getContent();
+		$decoded=json_decode($json,true);
+		$next = $decoded['next'];
 		$courses = $decoded['results'];
 		$admin  = User::find(2);
 		foreach($courses as $course){
-			$data = [
-			'url'=>$course['homepage'],
-			'name'=>	$course['title'],
-			'title' => $course['subtitle'],
-			'description' => substr($course['summary'],0,189)."..",
-			'image_url' => $course['image'],
-			];
-			$course = new Course($data);
-			$admin->publish($course);
+			if($course['marketing_url'] != null && count(course::where('url',$course['marketing_url'])->get()) == 0){
+				$data = [
+				'url'=>$course['marketing_url'],
+				'name'=>	$course['title'],
+				'title' => $course['title'],
+				'description' => $this->mysql_clean($course['short_description']),
+				'image_url' => $course['image']['src'],
+				];
+				echo "Saving: ".$data['name']."\r\n";
+				$tags = array();
+				foreach($course['subjects'] as $subject){
+					array_push($tags,$subject['name']);
+				}
+
+				$course = new Course($data);
+				$admin->publish($course);
+				$course->insertTags($course,$tags);
+			}
 		}
 		
 		if($next != null){
-			edxCrawl($next);
+			$this->edxCrawl($client,$next);
 		}
 	}
 
