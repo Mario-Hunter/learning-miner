@@ -47,6 +47,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Interest::class);
     }
+    public function follower()
+    {
+        return $this->hasMany(follower::class);
+    }
 
     public function isRanked(Course $course, $value, User $user)
     {
