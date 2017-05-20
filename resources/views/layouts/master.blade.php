@@ -54,7 +54,7 @@
   @include('layouts.errors')
   @include('layouts.jquery')
 
-@if(Request::route()->getName() === 'user_profile') 
+@if(Request::route()->getName() === 'user_profile')
 @else
 <div class="bluringDiv"></div>
 @endif

@@ -53,7 +53,7 @@ Route::get('/userInfo/{user}','UserController@showUserInfo')->name('user_profile
 Route::post('/userInfo/{user}','UserController@update_avatar');
 
 Route::get('/interest/{course}','InterestController@setStoreDelete');
-Route::get('/interests/courses','InterestController@index');
+Route::get('/interests/courses/{page}','InterestController@index')->name('interests');
 
 Route::get('crawl/{query}','CrawlerController@crawl');
 
@@ -61,4 +61,4 @@ Route::post('/follow/{user}','FollowerController@follow');
 Route::post('/follow/{user}','FollowerController@follow');
 Route::get('/follow/followers/{user}','FollowerController@followers');
 Route::get('/follow/following/{user}','FollowerController@following');
-Route::get('/home', 'FollowerController@following');
+Route::get('/home/{page}', 'FollowerController@following')->name('home');

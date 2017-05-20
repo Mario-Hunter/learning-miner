@@ -43,7 +43,7 @@ class InterestController extends Controller
 		return Redirect::back();
 	}
 
-	public function index()
+	public function index($page)
 	{
 		$user = auth()->user();
 		$interests = $user->interest()->get();
@@ -57,7 +57,10 @@ class InterestController extends Controller
 			array_push($courses, $courseCollection[0]);
 		}
 		
-		return view('courses.interest', compact('courses'));
+		$limit = ceil(count($courses) / 10.0);
+        $courses = array_slice($courses, 10 * ($page - 1) , 10 * ($page), true);
+
+		return view('courses.interest', compact('courses','page','limit'));
 	}
 
 }

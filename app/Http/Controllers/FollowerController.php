@@ -48,7 +48,7 @@ class FollowerController extends Controller
 
         //return view('courses.interest', compact('courses'));
     }
-    public function following()
+    public function following($page)
     {
         $user=auth()->user();
         $following = $user->follower()->get();
@@ -64,17 +64,21 @@ class FollowerController extends Controller
             array_push($following_users,$userr);
          
         }
-        //dd($following_users);
+
         $courses= array();
         if(count($following_users)!=0){
-        $courses = Course::where(function($query) use ($following_users){
-            foreach($following_users as $fuser){
-                $query->orwhere('user_id',$fuser->id);
-            }
-        })->get();
+            $courses = Course::where(function($query) use ($following_users){
+               foreach($following_users as $fuser){
+                    $query->orwhere('user_id',$fuser->id);
+                }
+             })->get();
         }
         
-       return view('courses.index', compact('courses'));
+        $limit = ceil(count($courses) / 10.0);
+        $courses = array_slice($courses, 10 * ($page - 1) , 10 * ($page), true);
+
+
+       return view('courses.homecourses', compact('courses','page','limit'));
     }
 
 

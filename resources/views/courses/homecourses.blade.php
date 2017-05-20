@@ -13,10 +13,10 @@
 
 <div>
 	@if($page > 1)
-		<a href="/courses/page/{{$page - 1}}" class="btn btn-primary">Previous</a>
+		<a href="/home/{{$page - 1}}" class="btn btn-primary">Previous</a>
 	@endif
 	@if($page < $limit)
-		<a href="/courses/page/{{$page + 1}}" class="btn btn-primary">Next</a>
+		<a href="/home/{{$page + 1}}" class="btn btn-primary">Next</a>
 	@endif
 </div>
 

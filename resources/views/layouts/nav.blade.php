@@ -43,17 +43,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="navbutton1">
-          @if(Request::url() === 'http://localhost:8000/home') 
-        <a class="nav-link active" href="/home">Home<span class="sr-only">(current)</span></a>
+          @if(Request::route()->getName() === 'home') 
+        <a class="nav-link active" href="/home/1">Home<span class="sr-only">(current)</span></a>
           @else
-        <a class="nav-link " href="/home">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="/home/1">Home<span class="sr-only">(current)</span></a>
           @endif
       </li>
       <li class="navbutton2">
-           @if(Request::url() === 'http://localhost:8000/interests/courses') 
-        <a class="nav-link active" href="/interests/courses">My Courses</a>
+           @if(Request::route()->getName() === 'interests') 
+        <a class="nav-link active" href="/interests/courses/1">My Courses</a>
           @else
-         <a class="nav-link" href="/interests/courses">My Courses</a>
+         <a class="nav-link" href="/interests/courses/1">My Courses</a>
           @endif
       </li>
 	   <li class="navbutton3">

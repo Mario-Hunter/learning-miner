@@ -106,7 +106,7 @@
 
             background-image:url('/images/backHome.jpg');
 			 background-repeat:no-repeat;
-            background-size:1600px 780px;
+            background-size:cover;
         }
 		a.link {font-family: "Comic Sans MS", Helvetica, sans-serif;}
 		input[type=button]{
