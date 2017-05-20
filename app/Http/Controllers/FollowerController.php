@@ -64,13 +64,17 @@ class FollowerController extends Controller
             array_push($following_users,$userr);
          
         }
+        //dd($following_users);
+        $courses= array();
+        if(count($following_users)!=0){
         $courses = Course::where(function($query) use ($following_users){
-            foreach($following_users as $user){
-                $query->orwhere('user_id',$user->id);
+            foreach($following_users as $fuser){
+                $query->orwhere('user_id',$fuser->id);
             }
         })->get();
+        }
         
-       return view('user.show', compact('following_users'));
+       return view('courses.index', compact('courses'));
     }
 
 }
