@@ -40,7 +40,7 @@ class Crawler extends Model
 
 		foreach($courses as $course){
 			
-			
+			echo "Checking: ".$course['title']."\r\n";
 			if($course['homepage'] != null && count(course::where('url',$course['homepage'])->get()) == 0){
 				$description =$course['summary'];
 				$data = [
@@ -50,12 +50,15 @@ class Crawler extends Model
 				'description' => $this->mysql_clean($description),
 				'image_url' => $course['image'],
 				];
-				echo $data['url']."\r\n";
-				echo $data['description']."\r\n";
-				$tags= $course['tracks'];
-				$courseModel = new Course($data);
-				$admin->publish($courseModel);
-				$courseModel->insertTags($courseModel,$tags);
+				echo "Saving: ".$data['name']."\r\n";
+				try{
+					$tags= $course['tracks'];
+					$courseModel = new Course($data);
+					$admin->publish($courseModel);
+					$courseModel->insertTags($courseModel,$tags);
+				}catch(\Illuminate\Database\QueryException $e){
+					echo "Couldn't save ".$data['name']."\r\n";
+				}
 			}
 		}
 
@@ -78,7 +81,7 @@ class Crawler extends Model
 //     )
 // ));
 		$client->setHeader("Authorization", "JWT ".$access_token);
-		$this->edxCrawl($client,"https://api.edx.org/catalog/v1/catalogs/129/courses");
+		$this->edxCrawl($client,"https://api.edx.org/catalog/v1/catalogs/129/courses",1);
 		 //$client -> request("GET","https://api.edx.org/catalog/v1/catalogs/129/courses");
 		 //$response = $client->getResponse();
 		 //$json = $response->getContent();
@@ -88,7 +91,8 @@ class Crawler extends Model
 		// echo $decoded['count']."\r\n";
 	}
 
-	public function edxCrawl($client,$seed){
+	public function edxCrawl($client,$seed,$page){
+		echo "Reading Page ".$page."\r\n";
 		$crawler = $client -> request('GET',$seed);
 		$response = $client->getResponse();
 		$json = $response->getContent();
@@ -97,6 +101,7 @@ class Crawler extends Model
 		$courses = $decoded['results'];
 		$admin  = User::find(2);
 		foreach($courses as $course){
+			echo "Checking: ".$course['title']."\r\n";
 			if($course['marketing_url'] != null && count(course::where('url',$course['marketing_url'])->get()) == 0){
 				$data = [
 				'url'=>$course['marketing_url'],
@@ -110,15 +115,18 @@ class Crawler extends Model
 				foreach($course['subjects'] as $subject){
 					array_push($tags,$subject['name']);
 				}
-
-				$course = new Course($data);
-				$admin->publish($course);
-				$course->insertTags($course,$tags);
+				try{
+					$course = new Course($data);
+					$admin->publish($course);
+					$course->insertTags($course,$tags);
+				}catch(\Illuminate\Database\QueryException $e){
+					echo "Couldn't Save ".$data['name']."\r\n";
+				}
 			}
 		}
 		
 		if($next != null){
-			$this->edxCrawl($client,$next);
+			$this->edxCrawl($client,$next,$page+1);
 		}
 	}
 
@@ -145,8 +153,14 @@ class Crawler extends Model
 			$url = $text;
 			$pos = strpos($url,"?");
 			if($pos == false){
+				if(array_key_exists($url,$this->crawled)){
+					return null;
+				}
 				return $url;
 			}
+			if(array_key_exists(substr($url,0,$pos),$this->crawled)){
+					return null;
+				}
 			return substr($url,0,$pos);
 
 		});
@@ -165,13 +179,13 @@ class Crawler extends Model
 
 		if($depth < $this->max_depth){
 			foreach($to_crawl_urls as $url){
-				if($url != null && !array_key_exists($url,$this->crawled)){
+				if($url != null && !array_key_exists($url,$this->crawled) && !array_key_exists($url,$this->to_crawl) ){
 					$this->to_crawl[$url]=$depth;
 				}
 			}
 			foreach($courses_urls as $url){
 				$url = "https://www.".$this->domain.$url;
-				if(!array_key_exists($url,$this->crawled)){
+				if($url != null && !array_key_exists($url,$this->crawled) && !array_key_exists($url,$this->to_crawl)){
 					$this->to_crawl[$url]=$depth;
 				}
 			}
@@ -191,11 +205,15 @@ class Crawler extends Model
 				$metaCrawler = $client -> request('GET',"https://www.".$this->domain.$urls[$i]);
 
 				$data = $this->getMetaData($metaCrawler,$urls[$i]);
-
+					echo "Saving: https://www.".$this->domain.$urls[$i]."\r\n";	
+					
 				if($data['name'] != null){
+					try{
 					$course =new Course($data);
 					$admin->publish($course);
-					echo "https://www.".$this->domain.$urls[$i]."\r\n";	
+				}catch(\Illuminate\Database\QueryException $e){
+					echo "Couldn't Save https://www.".$this->domain.$urls[$i]."\r\n";	
+				}
 				}
 
 			//$course->insertTags($course,$tags);
