@@ -49,7 +49,7 @@ Route::post('/courses/{course}/comments','CommentController@store');
 
 Route::get('/users/{user}','UserController@show');
 Route::get('/user/{user}','UserController@showUserCourses');
-Route::get('/userInfo/{user}','UserController@showUserInfo');
+Route::get('/userInfo/{user}','UserController@showUserInfo')->name('user_profile');
 Route::post('/userInfo/{user}','UserController@update_avatar');
 
 Route::post('/interest/{course}','InterestController@setStoreDelete');
