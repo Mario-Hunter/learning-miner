@@ -43,10 +43,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="navbutton1">
-          @if(Request::url() === 'http://localhost:8000/home/1') 
-        <a class="nav-link active" href="/home/{{auth()->user()->id}}">Home<span class="sr-only">(current)</span></a>
+          @if(Request::url() === 'http://localhost:8000/home') 
+        <a class="nav-link active" href="/home">Home<span class="sr-only">(current)</span></a>
           @else
-        <a class="nav-link " href="/home/{{auth()->user()->id}}">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="/home">Home<span class="sr-only">(current)</span></a>
           @endif
       </li>
       <li class="navbutton2">

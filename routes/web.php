@@ -52,7 +52,7 @@ Route::get('/user/{user}','UserController@showUserCourses');
 Route::get('/userInfo/{user}','UserController@showUserInfo')->name('user_profile');
 Route::post('/userInfo/{user}','UserController@update_avatar');
 
-Route::post('/interest/{course}','InterestController@setStoreDelete');
+Route::get('/interest/{course}','InterestController@setStoreDelete');
 Route::get('/interests/courses','InterestController@index');
 
 Route::get('crawl/{query}','CrawlerController@crawl');
