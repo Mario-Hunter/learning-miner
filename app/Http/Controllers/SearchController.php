@@ -24,31 +24,52 @@ class SearchController extends Controller
         return redirect("/search/$course");	
     }
 
-    public function show($course)
+    public function show($course,$page)
     {
-       /* $tags = explode(' ',$course);
-        $allCourses = array();
-        $tagEntry = Tag::whereIn('name',$tags)->get();
-        if(count($tagEntry) != 0){
-           $courses = $tagEntry[0]->courses()->orderBy('rank','desc')->get();
-       }else {
-            $courses = Course::where(function($query) use ($tags){
-                foreach($tags as $tag){
-                    $query->orwhere('name','LIKE','%'.$tag.'%');
-                }
-            })->orderBy('rank','desc')->get();
-       }*/
 
-      $courseNames = array_merge(array($course),explode(' ',$course));
-      $courses = Course::where(function($query) use ($courseNames){
+
+      $courseByFullName = Course::where('name','LIKE','%'.$course.'%')->orderBy('searchRank');
+
+      $courseNames = explode(' ',$course);
+      $coursesByName = Course::where(function($query) use ($courseNames){
               foreach($courseNames as $name){
                   $query->orwhere('name','LIKE','%'.$name.'%');
               }
-      })->orderBy('searchRank')->get();
+      })->orderBy('searchRank')->union($courseByFullName)->get();
 
 
+      $tags = explode(' ',$course);
+      $tagEntry = Tag::whereIn('name',$tags)->get();
+      $coursesByTags = array();
+      if(count($tagEntry) != 0){
+    
+        $coursesByTags = Course::where(function($query) use ($tagEntry) {
+
+          foreach ($tagEntry as $tag) {
+            $tagCourses = $tag->courses()->get();
+            foreach ($tagCourses as $tagCourse) {
+              $query->orwhere('name','=',$tagCourse->name);
+            }
+          }
+        })->orderBy('searchRank')->get();
+      } 
+
+      $coursesByName = $this->toArray($coursesByName);
+      $coursesByTags = $this->toArray($coursesByTags);
+      $courses = array_unique(array_merge($coursesByName,$coursesByTags));
+
+      $courses = array_slice($courses, 10 * ($page - 1) , 10 * ($page), true);
 
       return view('search',compact('courses'));
    }
 
+   private function toArray($collection)
+   {
+      $transArray = array();
+      foreach ($collection as $element) {
+        array_push($transArray, $element);
+      }
+
+      return $transArray;
+   }
 }

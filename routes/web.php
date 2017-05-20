@@ -28,10 +28,6 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 Route::get('/redirect/google', 'SocialAuthController@gredirect');
 Route::get('/callback/google', 'SocialAuthController@gcallback');
 
-
-
-
-
 Route::get('/home/{user}', 'HomeController@index');
 
 Route::get('/courses', 'CourseController@index');
@@ -46,7 +42,7 @@ Route::get('/courses/tags/{tag}','TagController@index');
 Route::post('/courses/{course}/rank', 'RankController@store');
 
 Route::post('/search', 'SearchController@set');
-Route::get('/search/{course}', 'SearchController@show');
+Route::get('/search/{course}/{page}', 'SearchController@show');
 
 Route::post('/courses/{course}/comments','CommentController@store');
 
@@ -55,10 +51,8 @@ Route::get('/user/{user}','UserController@showUserCourses');
 Route::get('/userInfo/{user}','UserController@showUserInfo');
 Route::post('/userInfo/{user}','UserController@update_avatar');
 
-Route::post('/interest/{course}','InterestController@store');
+Route::post('/interest/{course}','InterestController@setStoreDelete');
 Route::get('/interests/courses','InterestController@index');
-
 
 Route::get('crawl/{query}','CrawlerController@crawl');
 Route::post('/follow/{user}','FollowerController@follow');
-

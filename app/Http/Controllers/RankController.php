@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Rank;
 use App\Course;
 use App\Events\RankCreated;
+use Illuminate\Support\Facades\Redirect;
+
 class RankController extends Controller
 {
 
@@ -42,6 +44,6 @@ class RankController extends Controller
 		}
 		event(new RankCreated($course,$newRank,$user));
 
-		return redirect('/courses'."/$course->id");
+		return Redirect::back();
 	}
 }
