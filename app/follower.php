@@ -29,7 +29,7 @@ class follower extends Model
         }   
         else
         {
-            return true;
+             return true;
         }
     }
 }

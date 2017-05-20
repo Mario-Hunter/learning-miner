@@ -23,7 +23,7 @@
 		<li class="list-group-item">
 		<strong>
 
-			<h2 class="blog-course-title"><a href = "/courses/{{$course ->id}}">{{$course->name}}</a></h2>
+			<h2 class ="blog-course-title"><a href = "/courses/{{$course ->id}}">{{$course->name}}</a></h2>
 			
 	
 			<p class="blog-course-meta">{{$course->created_at->toFormattedDateString()}}</p>
