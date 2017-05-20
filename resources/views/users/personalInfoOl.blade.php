@@ -5,7 +5,7 @@
 		<label>Update Profile Image</label>
 			<input type="file" name="avatar">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="file" class="pull-right btn btn-sm btn-primary">
+			<input type="submit" class="pull-right btn btn-sm btn-primary">
 	</form>
 	
 
