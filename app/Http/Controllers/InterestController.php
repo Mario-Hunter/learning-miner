@@ -8,31 +8,39 @@ use App\Auth;
 use App\User;
 use App\Interest;
 use App\ActivityLog;
+use Illuminate\Support\Facades\Redirect;
 
 class InterestController extends Controller
 {
     
-	//use xor
-	public function store(Course $course)
+	public function setStoreDelete(Course $course)
 	{
 		$user = auth()->user();
 		$entry = $user->checkIfInterestExist($user,$course);
-		if(!$entry)
+		$valueOfIntrest = 1;
+		if($entry)
 		{
-			$entry = new Interest();
-			$entry->course_id = $course->id;
-			$entry->user_id = $user->id;
-			$entry->interest = 1;
-			$entry->save();
+			$entry = Interest::where('course_id','=',$course->id)->delete();
+			$valueOfIntrest = 0;
 		}
+		else
+		{
+			$entry = Interest::create([
+
+					'course_id' => $course->id,
+					'user_id' => $user->id,
+					'interests' => 1
+				]);
+		}
+
 		$log = ActivityLog::create(['user_id'=>$user->id,
             'course_id'=>$course->id,
             'action_type'=>"interest",
-            'action_body'=>"1"
-            ]);
+            'action_body'=> $valueOfIntrest
+        ]);
         
 
-		return redirect('/courses');
+		return Redirect::back();
 	}
 
 	public function index()

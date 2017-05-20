@@ -47,6 +47,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Interest::class);
     }
+    public function follower()
+    {
+        return $this->hasMany(follower::class);
+    }
 
     public function isRanked(Course $course, $value, User $user)
     {
@@ -85,6 +89,7 @@ class User extends Authenticatable
         }
         return false;
     }
+    
     public function addScore($value)
     {
         $score = $this->user_score;

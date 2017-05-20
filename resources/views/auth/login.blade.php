@@ -55,7 +55,7 @@
                                 <button type="submit" class="btn btn-primary btnPos">
                                     Login
                                 </button>
-                                <a href="redirect">
+                                <a href="redirect/facebook">
                                     <button type="button" id="facebook">Sign in with Facebook</button>
                                 </a>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">

@@ -10,6 +10,8 @@ use App\User;
 use Goutte\Client;
 use Illuminate\Support\Facades\Auth;
 use App\Events\CourseCreated;
+use Illuminate\Support\Facades\Redirect;
+
 
 class CourseController extends Controller
 {
@@ -117,6 +119,11 @@ class CourseController extends Controller
   public function show(Course $course, User $user)
   {
    return view('courses.show',compact('course','user'));
+ }
+
+ public function delete(Course $course){
+  $course->delete();
+  return Redirect::back();
  }
 
 }

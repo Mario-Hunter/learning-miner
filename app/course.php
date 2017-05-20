@@ -190,5 +190,4 @@ public function standardDeviation()
     $arrayOfMeanAndSD[] = array($mean, $standardDeviation);
     return $arrayOfMeanAndSD;
 }
-
 }
