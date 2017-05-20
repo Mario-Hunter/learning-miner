@@ -32,8 +32,9 @@ class CourseController extends Controller
       redirect('/courses');
     }
     $courses = Course::latest()->take(10)->get();
-
-    return view('courses.index',compact('courses'));
+    $page = 1;
+    $limit = Course::count();
+    return view('courses.index',compact('courses','page','limit'));
   }
 
   
@@ -47,10 +48,10 @@ class CourseController extends Controller
       redirect('/courses');
     }
 
+    $limit = Course::count();
+    $courses = Course::latest()->take(10)->offset(($page-1)*10)->get();
 
-    $courses = Course::latest()->take(10)->offset($page*10)->get();
-
-    return view('courses.index',compact('courses'));
+    return view('courses.index',compact('courses','page','limit'));
   }
 
 
