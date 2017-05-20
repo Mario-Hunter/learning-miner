@@ -1,5 +1,5 @@
 <?php
-
+use App\Events\CommentCreated;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +39,7 @@ Route::get('/courses/page/{page}', 'CourseController@indexPage');
 
 Route::get('/courses/create', 'CourseController@create');
 Route::get('/courses/{course}', 'CourseController@show');
+Route::delete('/courses/{course}', 'CourseController@delete');
 
 Route::get('/courses/tags/{tag}','TagController@index');
 
