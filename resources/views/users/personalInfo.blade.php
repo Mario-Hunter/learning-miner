@@ -39,10 +39,12 @@
          
                     </tbody>
        </table>
-	   <button class="changePicturebutton">CHANGE PHOTO&nbsp;&nbsp;</button>
-    <form enctype="multipart/form-data" action="/userInfo/{{$user->id}}" method="POST">
+	   
+    <form enctype="multipart/form-data" action="/userInfo/{{$user->id}}" method="POST" >
+    		<label><button class="changePicturebutton">CHANGE PHOTO&nbsp;&nbsp;</button></label>
 			<input type="file" class="uploadphoto" name="avatar">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	</form>
 	</form>
  </body>
 
