@@ -10,7 +10,7 @@ class SearchController extends Controller
 {
 
 
-	public function set()
+	 public function set()
     {   
         $this->validate(request(),[
 
@@ -26,35 +26,29 @@ class SearchController extends Controller
 
     public function show($course)
     {
-        $tags = explode(' ',$course);
+       /* $tags = explode(' ',$course);
         $allCourses = array();
         $tagEntry = Tag::whereIn('name',$tags)->get();
         if(count($tagEntry) != 0){
-           $courses =$tagEntry[0]->courses()->orderBy('rank','desc')->get();
+           $courses = $tagEntry[0]->courses()->orderBy('rank','desc')->get();
        }else {
             $courses = Course::where(function($query) use ($tags){
                 foreach($tags as $tag){
                     $query->orwhere('name','LIKE','%'.$tag.'%');
                 }
             })->orderBy('rank','desc')->get();
-       }
-        // foreach($tags as $tag){
-        //     $tagEntry = Tag::where('name',$tag)->get();
-        //     if(count($tagEntry) != 0){
-        //         $courses =$tagEntry[0]->courses()->orderBy('rank','desc')->get();
-        //         array_merge($allCourses, $courses );
-        //     }else{
-        //         $courses = Course::where('name','LIKE','%'.$course.'%')->orderBy('rank','desc')->get();
-        //         if(count($courses) != 0){
-        //             array_merge($allCourses, $courses );
-        //         }
+       }*/
 
-        //     }
-        // }
+      $courseNames = array_merge(array($course),explode(' ',$course));
+      $courses = Course::where(function($query) use ($courseNames){
+              foreach($courseNames as $name){
+                  $query->orwhere('name','LIKE','%'.$name.'%');
+              }
+      })->orderBy('searchRank')->get();
 
 
-       
-      // return view('search',compact('coursesNames','coursesTags'));
-       return view('search',compact('courses'));
+
+      return view('search',compact('courses'));
    }
+
 }
