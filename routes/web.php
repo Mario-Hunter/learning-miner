@@ -32,7 +32,6 @@ Route::get('/callback/google', 'SocialAuthController@gcallback');
 
 
 
-Route::get('/home/{user}', 'HomeController@index');
 
 Route::get('/courses', 'CourseController@index');
 Route::post('/courses', 'CourseController@store');
@@ -61,4 +60,8 @@ Route::get('/interests/courses','InterestController@index');
 
 Route::get('crawl/{query}','CrawlerController@crawl');
 Route::post('/follow/{user}','FollowerController@follow');
+Route::get('/follow/followers/{user}','FollowerController@followers');
+Route::get('/follow/following/{user}','FollowerController@following');
+Route::get('/home', 'FollowerController@following');
+
 
