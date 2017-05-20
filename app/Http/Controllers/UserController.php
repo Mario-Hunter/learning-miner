@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use App\Course;
 use App\Tag;
 use App\Rank;
@@ -72,9 +73,46 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    protected function update(array $data)
+    {   
+
+        $oldpasswordInDB=auth()->user()->password;
+        if($oldpasswordInDB==bcrypt($data['password']))
+        {
+        $date = $data['birthDay']." ".$data['birthMonth']." ".$data['birthYear'];
+        $dob = Carbon\Carbon::parse($date);
+        DB::table('users')
+            ->where('id', $data['id'])
+            ->update([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'dob' => $dob,
+            'gender'=>$data['gender'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+            return view('user.info');
+        }
+        else{
+
+            session()->flash('message','Please Enter the old Password right!');
+            return Redirect::back();
+        }
+        
+        
+    }
+    protected function validator(array $data)
     {
-        //
+        return Validator::make($data, [
+            'first_name' => 'required|max:255',
+            'birthDay'=>'required',
+            'birthMonth'=>'required',
+            'birthYear'=>'required',
+            'password'          => 'required|min:8',
+            'old_password'              => 'required|min:8|confirmed|different:password',
+            'password_confirmation' => 'required|min:8',       
+        ]);
     }
 
     /**

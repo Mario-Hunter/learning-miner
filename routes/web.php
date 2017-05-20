@@ -1,5 +1,5 @@
 <?php
-
+use App\Events\CommentCreated;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,14 +28,13 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 Route::get('/redirect/google', 'SocialAuthController@gredirect');
 Route::get('/callback/google', 'SocialAuthController@gcallback');
 
-Route::get('/home/{user}', 'HomeController@index');
-
 Route::get('/courses', 'CourseController@index');
 Route::post('/courses', 'CourseController@store');
 Route::get('/courses/page/{page}', 'CourseController@indexPage');
 
 Route::get('/courses/create', 'CourseController@create');
 Route::get('/courses/{course}', 'CourseController@show');
+Route::delete('/courses/{course}', 'CourseController@delete');
 
 Route::get('/courses/tags/{tag}','TagController@index');
 
@@ -55,4 +54,9 @@ Route::post('/interest/{course}','InterestController@setStoreDelete');
 Route::get('/interests/courses','InterestController@index');
 
 Route::get('crawl/{query}','CrawlerController@crawl');
+
 Route::post('/follow/{user}','FollowerController@follow');
+Route::post('/follow/{user}','FollowerController@follow');
+Route::get('/follow/followers/{user}','FollowerController@followers');
+Route::get('/follow/following/{user}','FollowerController@following');
+Route::get('/home', 'FollowerController@following');
