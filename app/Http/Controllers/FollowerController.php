@@ -77,4 +77,5 @@ class FollowerController extends Controller
        return view('courses.index', compact('courses'));
     }
 
+
 }
