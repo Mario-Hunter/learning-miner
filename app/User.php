@@ -79,7 +79,7 @@ class User extends Authenticatable
         return null;
     }
 
-    public function checkIfInterestExist(User $user, Course $course)
+    public static function checkIfInterestExist(User $user, Course $course)
     {
         $interestsArr = $user->interest()->get();
 

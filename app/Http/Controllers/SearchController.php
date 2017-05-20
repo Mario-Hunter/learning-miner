@@ -20,17 +20,17 @@ class SearchController extends Controller
 
           ]);
 
-        $course = request('name');
-        return redirect("/search/$course");	
+        $toSearch = request('name');
+        return redirect("/search/$toSearch/1");	
     }
 
-    public function show($course,$page)
+    public function show($toSearch,$page)
     {
 
 
-      $courseByFullName = Course::where('name','LIKE','%'.$course.'%')->orderBy('searchRank');
+      $courseByFullName = Course::where('name','LIKE','%'.$toSearch.'%')->orderBy('searchRank');
 
-      $courseNames = explode(' ',$course);
+      $courseNames = explode(' ',$toSearch);
       $coursesByName = Course::where(function($query) use ($courseNames){
               foreach($courseNames as $name){
                   $query->orwhere('name','LIKE','%'.$name.'%');
@@ -38,7 +38,7 @@ class SearchController extends Controller
       })->orderBy('searchRank')->union($courseByFullName)->get();
 
 
-      $tags = explode(' ',$course);
+      $tags = explode(' ',$toSearch);
       $tagEntry = Tag::whereIn('name',$tags)->get();
       $coursesByTags = array();
       if(count($tagEntry) != 0){
@@ -57,10 +57,10 @@ class SearchController extends Controller
       $coursesByName = $this->toArray($coursesByName);
       $coursesByTags = $this->toArray($coursesByTags);
       $courses = array_unique(array_merge($coursesByName,$coursesByTags));
-
+      $limit = ceil(count($courses) / 10.0);
       $courses = array_slice($courses, 10 * ($page - 1) , 10 * ($page), true);
-
-      return view('search',compact('courses'));
+      
+      return view('search',compact('courses','toSearch','page','limit'));
    }
 
    private function toArray($collection)

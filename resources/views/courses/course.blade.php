@@ -22,7 +22,7 @@
 		@endforeach
 	 </div>
 	 @if(!Auth::guest())
-	<form  class="ratingsbutton" method="post" action="/courses/{{$course->id}}/rank ">
+		<form  class="ratingsbutton" method="post" action="/courses/{{$course->id}}/rank ">
 			{{csrf_field() }}
 			<div class="ratings">
 				<input type="hidden" id="star1{{$course->id}}_hidden" value="1">
@@ -39,15 +39,24 @@
 
 			<input type="hidden" name="starrating" id="rating{{$course->id}}" value="0">
 			<input type="submit" value="Submit" name="submit_rating">
-		</form> 
-		<form method="POST" action="/interest/{{$course->id}}">
-			{{csrf_field()}}
-			<a class="likeButton" href="/interest/{{$course->id}}">
-			   <img src = "/images/like.png" width = "55" height = "55"/>
-			</a>
 		</form>
+		@if(!App\User::checkIfInterestExist(Auth::user(),$course)) 
+			<form method="POST" action="/interest/{{$course->id}}">
+				{{csrf_field()}}
+				<a class="likeButton" href="/interest/{{$course->id}}">
+			   	<img src = "/images/like.png" width = "55" height = "55"/>
+				</a>
+			</form>
+		@else
+			<form method="POST" action="/interest/{{$course->id}}">
+				{{csrf_field()}}
+				<a class="likeButton" href="/interest/{{$course->id}}">
+			   	<img src = "/images/liked.png" width = "55" height = "55"/>
+				</a>
+			</form>
 		@endif
-		<div style="width : 200px"class="rankEqual">Ranked as :&nbsp; {{ $course->rank }} </div>
+		@endif
+	<div style="width : 200px"class="rankEqual">Ranked as :&nbsp; {{ $course->rank }} </div>
 </div>
 <div class="rightShift col-md-7">
 
