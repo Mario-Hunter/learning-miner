@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('/welcome');
+    If(!Auth::guest())
+        return redirect("/courses");
+    return view('welcome');
 });
 
 Route::get('register/verify/{confirmationCode}', [
@@ -48,7 +50,7 @@ Route::get('/user/{user}','UserController@showUserCourses');
 Route::get('/userInfo/{user}','UserController@showUserInfo');
 Route::post('/userInfo/{user}','UserController@update_avatar');
 
-Route::post('/interest/{course}','InterestController@store');
+Route::get('/interest/{course}','InterestController@store');
 Route::get('/interests/courses','InterestController@index');
 
 

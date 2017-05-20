@@ -1,7 +1,7 @@
-<ul class="list-group">
-	<div class="pre-scrollable">
+<ul class=" list-group commentsBackground">
+	<div class="pre-scrollable commentsBackground">
 		@foreach ($course->comments as $comment)
-			<li class="list-group-item">
+			<li class="list-group-item commentsSheetColor ">
 				<strong>
 					{{$comment->user->first_name}}
 					{{ $comment->created_at->diffForHumans() }}:&nbsp;

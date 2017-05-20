@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-md-2 form-group form-control">
+        <!--form-control instead of transparentLogin-->
+        <div class="col-md-8 offset-md-2 form-group transparentLogin">
             <div class="panel panel-default">
                 <div class="panel-heading text-center col-md-12"><strong>Login</strong></div>
                 <hr>
@@ -51,10 +52,12 @@
 
                         <div class="form-group">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btnPos">
                                     Login
                                 </button>
-                                <a href="redirect">FB Login</a>
+                                <a href="redirect">
+                                    <button type="button" id="facebook">Sign in with Facebook</button>
+                                </a>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>

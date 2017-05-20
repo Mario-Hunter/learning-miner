@@ -2,10 +2,15 @@
 <body class="profile">
   <div class = "usernametext" >{{$user->first_name}}{{' '}}{{$user->last_name}}</div>
   <object data="/images/purpleBack" type="image/jpg" class="userphoto">
-    <img src={{$user->avatar}}/>
+    <img width="210" height="279" src="{{$user->avatar}}"/>
   </object>
+    <!--<form enctype="multipart/form-data" action="/userInfo/{{$user->id}}" method="POST">
+			<input type="file" name="avatar">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="file" class="pull-right btn btn-sm btn-primary">
+	</form>-->
 
-<img class="eminerPhoto" src="/images/BoldLogo.jpg"> 
+<img class="eminerPhoto" src="/images/BoldLogo3.png"> 
 
 	 <table class= "userdata ">
                     <tbody>
@@ -35,6 +40,10 @@
                     </tbody>
        </table>
 	   <button class="changePicturebutton">CHANGE PHOTO&nbsp;&nbsp;</button>
+    <form enctype="multipart/form-data" action="/userInfo/{{$user->id}}" method="POST">
+			<input type="file" class="uploadphoto" name="avatar">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	</form>
  </body>
 
 	@foreach($user->courses as $course)

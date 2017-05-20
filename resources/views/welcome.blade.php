@@ -126,7 +126,7 @@
       <a href="/register">
   	   	   <input type="button" class="button2" value="Sign up">
       </a>
-	   <a href="https://www.google.com"  class="button3">Continue as guest</a>
+	   <a href="/courses"  class="button3" style="text-decoration:none">Continue as guest</a>
   </div>
 
   </body>

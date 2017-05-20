@@ -1,5 +1,5 @@
 <div class="card">
-	<div class = "card-block">
+	<div class = "card-block commentsBackground">
 		<form method="POST" action="/courses/{{$course->id}}/comments">
 
 			{{csrf_field()}}

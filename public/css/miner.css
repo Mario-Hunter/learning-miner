@@ -1,3 +1,5 @@
+/*----------------------------------------------- whole app css ---------------------------------*/
+
 html,body
 {
     width: 100%;
@@ -7,8 +9,9 @@ html,body
     overflow-x: hidden; 
 }
 body.home {
+   background-color: #77d5cd;
     background-image: url(/images/backHome.jpg);
-    padding-top: 5rem;
+    padding-top: 13rem;
     background-repeat: repeat-y;
     background-size:cover;
 }
@@ -16,12 +19,10 @@ body.home {
   padding: 3rem 1.5rem;
   text-align: left;
 }
-.tempPic {
-     background-image: url(/images/back.jpg);
-}
+
+/*-------------------------------------------------- user profile css ---------------------------------*/
 body.profile {
-      color:#000000;
-      background-color:#FFFFFF;
+    background-color: #EFCE5A;
       background-image:url('/images/back.jpg');
       background-repeat:no-repeat;
 	   background-size : 1600px 780px;
@@ -32,7 +33,7 @@ body.profile {
 {
 position : absolute ;
   left : 670px;
-  top : 350px;
+  top : 390px;
   width : 400px;
   height : 300px;
   font-family : AvantGarde-Demi; 
@@ -46,7 +47,7 @@ position : absolute ;
 {
   position : absolute ;
   left : 420px;
-  top : 635px;
+  top : 675px;
   width : 210px;
   height : 40px;
   background-color: #8C71B6;
@@ -60,6 +61,13 @@ position : absolute ;
   background-position: 8px -1px;
   background-repeat: no-repeat;
 }
+.uploadphoto
+{
+    position: absolute;
+left : 430px;
+top : 722px;
+    z-index: 10;
+}
 .userdata
 {
   font-family :"Trebuchet MS", Helvetica, sans-serif;
@@ -67,13 +75,13 @@ position : absolute ;
   position : absolute ;
     width: 100px;
   left : 670px;
-  top : 430px;
+  top : 470px;
   color : #FFFFFF;
   color : rgb(255, 255, 255);
 }
 br {
 
-  line-height:1.5em;/* chrome for instance */
+  line-height:1.5em;
 }
 .userphoto
 {
@@ -81,7 +89,7 @@ br {
   background : rgba(139, 113, 181, 1);
   position : absolute ;
   left : 420px;
-  top : 350px;
+  top : 390px;
   width : 210px;
   height : 279px;
 }
@@ -89,9 +97,288 @@ br {
 {
  background-image:url('/images/icoon.png');
  position : absolute ;
-  left : 610px;
-  top : 80px;
-  width : 370px;
-  height : 220px;
+  left : 690px;
+  top : 165px;
+  width : 210px;
+  height : 190px;
 
+}
+
+/*----------------------------------------------------- Navbar Css-----------------------------------------*/
+.navbar1
+{
+  background : #EDC951;
+  background : rgba(237, 201, 81, 1);
+  position : fixed ;
+  left : 40px;
+  top : 100px;
+  width : 1520px;
+  height : 63px;
+    z-index: 1;
+}
+a.eminerButton
+{   position: relative;
+    top: 2px;
+    z-index: 1;
+}
+.navbutton1
+{
+  background : #FFFFFF;
+  background : rgba(255, 255, 255, 0.2);
+  position : absolute ;
+  text-align: center;
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
+  font-size : 20px;
+  left : 260px;
+  top : 7px;
+  width : 83px;
+  height : 50px;
+}
+.navbutton2
+{
+  background : #FFFFFF;
+  background : rgba(255, 255, 255, 0.2);
+  position : absolute ;
+  text-align: center;
+font-family:"Trebuchet MS", Helvetica, sans-serif;
+  font-size : 20px;
+  left : 350px;
+  top : 7px;
+  width : 123px;
+  height : 50px;
+}
+.navbutton3
+{
+  background : #FFFFFF;
+  background : rgba(255, 255, 255, 0.2);
+  position : absolute ;
+  text-align: center;
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
+  font-size : 20px;
+  left : 480px;
+  top : 7px;
+  width : 123px;
+  height : 50px;
+}
+.navbutton4
+{
+  background : #FFFFFF;
+  background : rgba(255, 255, 255, 0.2);
+  position : absolute ;
+  text-align: center;
+font-family:"Trebuchet MS", Helvetica, sans-serif;
+  font-size : 20px;  
+  left : 610px;
+  top : 7px;
+  width : 83px;
+  height : 50px;
+}
+.navbutton5
+{
+  background : #FFFFFF;
+  background : rgba(255, 255, 255, 0.2);
+  position : absolute ;
+  text-align: center;
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
+  font-size : 20px;
+  left : 700px;
+  top : 7px;
+  width : 83px;
+  height : 50px;
+}
+.logoGroup
+{
+ position:absolute;
+ left : 34px;
+ top:-77px
+}
+.logoLamp 
+{
+ position:absolute;
+ left : 9px;
+ top:-110px
+}
+.active
+{
+    font-weight:400; 
+    background-color: #86DAD2;
+}
+.active2
+{
+    font-weight:400; 
+    background-color: #b19fcc;
+}
+
+/*------------------------------------------------- login page css -------------------------------*/
+
+button#facebook {
+    padding-right: 45px;
+    position: absolute;
+    left: 250px;
+    height: 35px;
+    background: none;
+    border: none;
+    display: block;
+    background-size: 35px 35px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    color: white;
+    font-family:"Merriweather Sans", sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    width: 205px;
+    border-bottom: 2px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: 0 4px 2px -2px gray;
+    text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
+    border-color: #2d5073;
+    background-color: #3b5998;
+    background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
+}
+.btnPos
+{
+    position: absolute;
+    left: -45px;
+     border-bottom: 2px solid transparent;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    box-shadow: 0 6px 4px -4px gray;
+}
+.divTransparent
+{
+    opacity: 0.4;
+}
+.transparentLogin
+{
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 1px solid gray;
+    box-shadow: 0 6px 4px -4px gray;
+    background-color:rgba(255, 255, 255, 0.3);
+}
+/*------------------------------------------------------ Bluring Div ---------------------------------------*/
+.bluringDiv 
+{
+    filter: blur(45px);
+    width: 1500px;
+    height: 180px;
+    position: fixed;
+    top: -50px;
+    left: 0px;
+    background-color: #62CCC2;
+   
+}
+/*------------------------------------------------------ Courses Ticket -------------------------------------*/
+.courseTicketprofile
+{
+background-image: url('/images/CourseBack.jpg');
+width:660px;
+height:430px;
+position:absolute;
+left:-180px;
+}		 
+.logo
+{
+ 	 position:relative;
+	 top: 5px;
+	 left : 50px;
+ }	 
+.courseName
+{
+ 		   position:relative;
+		   top:-30px;
+		   left:100px;
+		   font-family:sans-serif;
+		   font-size: 25px;
+		   color:#7C691D;
+		   text-align:center;
+
+ } 
+.coursePhoto
+{
+ 
+background-image: url('/images/defaultcourse.png');
+background-size:cover;
+position:relative;
+width:180px;
+height:220px;
+top:-175px;
+left : 30px;
+ }
+ .course_style
+ {
+  background-color:#8C71B6;
+  font-size: 15px;
+  font-family:;
+  padding-left:25px;
+  color:#FFFFFF;
+  padding-top:-5px;
+ }
+ .author
+ {		
+ position:relative;
+ top:-395px;
+ left: 220px;
+ 
+ }
+ .subtitle
+ {
+ position:relative;
+ top:-390px;
+ left: 220px;
+ 
+  }
+ .summary
+ {
+position:relative;
+ top:-385px;
+ left: 220px; 
+  }
+ .tags
+ {
+ position:relative;
+ top:-380px;
+ left: 220px;
+  }
+.ratings
+{
+ position:relative;
+ top:9px;
+ left:140px;
+ }
+ .ratingsbutton
+ {
+  position:relative;
+ top:-380px;
+ left:-110px;
+  }
+  .likeButton
+  {
+   position:relative;
+   top:-430px;
+   left: 560px;
+   background: url('like.png') 15px 15px no-repeat;
+   }
+  .rankEqual
+  {
+   position:relative; 
+   top:-465px;
+   left:300px;
+   }
+/*--------------------------------------------------------- Comments Shift -------------------------------------*/
+
+.rightShift
+{
+    position: absolute;
+    left: 470px;
+}
+.commentsBackground 
+{
+    background-color: #EDCE5A;
+}
+.commentsSheetColor
+{
+    background-color: #f9e495;
 }

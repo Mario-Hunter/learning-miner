@@ -13,7 +13,6 @@
 
   <!-- Custom styles for this template -->
  <link href="/css/miner.css" rel="stylesheet">
-
   <link rel="stylesheet" type="text/css" href=" /css/ratings.css">
   <link rel="stylesheet" type="text/css" href=" /css/LivePreview.css">
   <script type="text/javascript">
@@ -38,8 +37,7 @@
 
 </head>
 
-<body class = "home">
-
+<body bgcolor="#77d5cd" class = "home" >
   @include('layouts.nav')
 
   @if($flash = session('message'))
@@ -56,5 +54,9 @@
   @include('layouts.errors')
   @include('layouts.jquery')
 
+@if(Request::url() === 'http://localhost:8000/userInfo/1') 
+@else
+<div class="bluringDiv"></div>
+@endif
 </body>
 </html>
