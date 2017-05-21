@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\Followed;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-
+use App\Mail\FollowedNotification;
 class NotifyFollowedUser
 {
     /**

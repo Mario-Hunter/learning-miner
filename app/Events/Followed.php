@@ -12,9 +12,10 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class Followed
 {
-    public $userfollowing;
-    public $userfollowed
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    public $userfollowing;
+    public $userfollowed;
+    
 
     /**
      * Create a new event instance.
