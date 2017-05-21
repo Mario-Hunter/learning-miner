@@ -33,7 +33,7 @@ class CourseController extends Controller
     }
     $courses = Course::latest()->take(10)->get();
     $page = 1;
-    $limit = Course::count();
+    $limit = ceil(Course::count() / 10.0);
     return view('courses.index',compact('courses','page','limit'));
   }
 
@@ -48,7 +48,7 @@ class CourseController extends Controller
       redirect('/courses');
     }
 
-    $limit = Course::count();
+    $limit = ceil(Course::count() / 10.0);
     $courses = Course::latest()->take(10)->offset(($page-1)*10)->get();
 
     return view('courses.index',compact('courses','page','limit'));
