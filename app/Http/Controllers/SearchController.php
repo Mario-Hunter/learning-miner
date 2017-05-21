@@ -27,17 +27,17 @@ class SearchController extends Controller
     public function show($toSearch,$page)
     {
 
-
-      $courseByFullName = Course::where('name','LIKE','%'.$toSearch.'%')->orderBy('searchRank');
-
       $courseNames = explode(' ',$toSearch);
       $coursesByName = Course::where(function($query) use ($courseNames){
               foreach($courseNames as $name){
                   $query->orwhere('name','LIKE','%'.$name.'%');
               }
-      })->orderBy('searchRank')->union($courseByFullName)->get();
+      })->orderBy('searchRank');
 
+      $courseByFullName = Course::where('name','LIKE','%'.$toSearch.'%')->orderBy('searchRank')->union($coursesByName)->get();
 
+      $coursesByName = $courseByFullName;
+      
       $tags = explode(' ',$toSearch);
       $tagEntry = Tag::whereIn('name',$tags)->get();
       $coursesByTags = array();
