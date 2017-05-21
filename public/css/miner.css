@@ -297,12 +297,14 @@ button#facebook {
 
 .courseName {
     position: relative;
-    top: -30px;
-    left: 100px;
+    top: -65px;
+    left: 170px;
     font-family: sans-serif;
-    font-size: 25px;
+    font-size: 40px;
+    line-height: 40px;
     color: #7C691D;
     text-align: center;
+    
 }
 
 .coursePhoto {
@@ -317,11 +319,12 @@ button#facebook {
 
 .course_style {
     background-color: #8C71B6;
-    font-size: 15px;
+    font-size: 25px;
     font-family: ;
     padding-left: 25px;
     color: #FFFFFF;
     padding-top: -5px;
+    
 }
 
 .author {
@@ -334,23 +337,28 @@ button#facebook {
     position: relative;
     top: -390px;
     left: 220px;
+    overflow-x: hidden;
 }
 
 .summary {
     position: relative;
     top: -385px;
     left: 220px;
+    font-size: 17px;
+    
 }
 
 .tags {
     position: relative;
     top: -380px;
     left: 220px;
+    font-size: 18px;
+    
 }
 
 .ratings {
     position: relative;
-    top: 9px;
+    top: 15px;
     left: 140px;
 }
 
@@ -361,16 +369,21 @@ button#facebook {
 }
 
 .likeButton {
-    position: relative;
-    top: -430px;
-    left: 560px;
+    position: absolute;
+    top: 365px;
+    left: 570px;
     background: url('like.png') 15px 15px no-repeat;
 }
 
 .rankEqual {
-    position: relative;
-    top: -465px;
+    position: absolute;
+    top: 375px;
     left: 300px;
+    font-family: "Merriweather Sans", sans-serif;
+    font-size: 22px;
+    color: #8C71B6;
+    z-index: 0;
+    
 }
 
 
