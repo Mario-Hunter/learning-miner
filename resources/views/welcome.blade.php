@@ -117,7 +117,7 @@
 </style>
     </head>
   <div class = "icon" alt="" title="" ></div>
-  <div class = "Slogantext" alt="" title="" >"----Slogan----"</div>
+  <div class = "Slogantext" alt="" title="" >"Dig Deeper, Learn Neater"</div>
   <body class="home">
   <div class = "signuploginhome" alt="" title="" >
       <a href="/login">
