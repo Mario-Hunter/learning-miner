@@ -28,6 +28,11 @@ class EventServiceProvider extends ServiceProvider
             
         ],
 
+        'App\Events\Followed' => [
+            'App\Listeners\NotifyFollowedUser',
+            
+        ],
+
 
 
     ];

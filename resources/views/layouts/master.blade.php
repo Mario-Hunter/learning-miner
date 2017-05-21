@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>Learning Miner</title>
+ <link rel="icon" type="png" href="/images/BoldLogo3.png">
 
   <!-- Bootstrap core CSS -->
   <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +55,7 @@
   @include('layouts.errors')
   @include('layouts.jquery')
 
-@if(Request::route()->getName() === 'user_profile')
+@if(Request::route()->getName() === 'user_profile' || Request::route()->getName() === 'user_profile_picture')
 @else
 <div class="bluringDiv"></div>
 @endif
