@@ -1,8 +1,8 @@
 <div class="blog-course col-md-4">
 	<h2 class="blog-course-title"><a href = "/users/{{$user ->id}}">{{$user->first_name}}{{' '}}{{$user->last_name}}</a></h2>
 	
-	@if(!Auth::guest())
-	@if(auth()->user()->id!=$user->id && !App\follower::ifFollowingExists($user))
+	@if(!Auth::guest() && auth()->user()->id!=$user->id)
+	@if(!App\follower::ifFollowingExists($user))
 	<form method="POST" action="/follow/{{$user ->id}}">
 			{{csrf_field()}}
 			<button class="btn btn-primary" type="submit">Follow</button>
