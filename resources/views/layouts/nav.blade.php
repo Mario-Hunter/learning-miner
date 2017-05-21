@@ -31,6 +31,16 @@
    <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
 
     {{csrf_field()}}
+
+      <label>Rank: </label>
+      1<input type="checkbox" name="filterRank" value="1">
+      2<input type="checkbox" name="filterRank" value="2">
+      3<input type="checkbox" name="filterRank" value="3">
+      4<input type="checkbox" name="filterRank" value="4">
+      5<input type="checkbox" name="filterRank" value="5">
+      <label>Site:</label>
+      <input type="text" name="filterSite">
+
     
       <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" required>
     
@@ -82,9 +92,20 @@
    <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
 
     {{csrf_field()}}
-    
+
+      <label>Rank: </label>
+      1<input type="checkbox" name="filterRank" value="1">
+      2<input type="checkbox" name="filterRank" value="2">
+      3<input type="checkbox" name="filterRank" value="3">
+      4<input type="checkbox" name="filterRank" value="4">
+      5<input type="checkbox" name="filterRank" value="5">
+      <label>Site:</label>
+      <input type="text" name="filterSite">
+      
       <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" required>
-    
+      
+     
+
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     
     </form>

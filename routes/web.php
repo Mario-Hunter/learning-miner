@@ -43,7 +43,7 @@ Route::get('/courses/tags/{tag}','TagController@index');
 Route::post('/courses/{course}/rank', 'RankController@store');
 
 Route::post('/search', 'SearchController@set');
-Route::get('/search/{course}/{page}', 'SearchController@show');
+Route::get('/search/{course}/{page}/{filter}/{site}', 'SearchController@show');
 
 Route::post('/courses/{course}/comments','CommentController@store');
 
