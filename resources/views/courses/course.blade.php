@@ -7,15 +7,15 @@
 	 	  <img src={{$course->image_url}} width = "180" height="220">
 		  </a>
 	 </div>
-	 <div class="author course_style" style="width: 410px; height:40px;">{{$course->created_at->toFormattedDateString()}}, by <a href="/users/{{$course ->user->id}}" >{{$course->user->first_name}}{{' '}}{{$course->user->last_name}}</a></div>
-	 <div class="subtitle course_style" style="width: 410px; height:40px;"><a id="livePrev" href = {{$course->url}} > {{$course->url}}</a><div class="box"><iframe src="https://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div></div>
+	 <div class="author course_style" style="width: 420px; height:40px;">{{$course->created_at->toFormattedDateString()}}, by <a style="color: #D9BA4E" href="/users/{{$course ->user->id}}" >{{$course->user->first_name}}{{' '}}{{$course->user->last_name}}</a></div>
+	 <div class="subtitle course_style" style="width: 420px; height:40px;"><a id="livePrev" style="color: #D9BA4E" href = {{$course->url}} > {{$course->url}}</a><div class="box"><iframe src="https://en.wikipedia.org/" width = "500px" height = "500px"></iframe></div></div>
 	 
 	
-	 <div class="summary course_style" style="width: 410px; height:85px;">{{$course->description}}</div>
+	 <div class="summary course_style" style="width: 420px; height:85px;">{{$course->description}}</div>
     <!-- @if($course->description != null)-->
 	 <!--@endif-->
 	 
-	 <div class="tags course_style" style="width: 410px; height:40px;">
+	 <div class="tags course_style" style="width: 420px; height:40px;">
 	 tags: 
 		@foreach($course->tags()->get() as $tag)
 		<a href="/courses/tags/{{$tag->name}}"> {{$tag->name}}</a>

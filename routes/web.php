@@ -54,6 +54,8 @@ Route::post('/userInfo/{user}','UserController@update_avatar');
 
 Route::get('/interest/{course}','InterestController@setStoreDelete');
 Route::get('/interests/courses/{page}','InterestController@index')->name('interests');
+Route::get('/interests/courses','InterestController@index');
+
 
 Route::get('crawl/{query}','CrawlerController@crawl');
 
