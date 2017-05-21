@@ -57,10 +57,21 @@ class InterestController extends Controller
 			array_push($courses, $courseCollection[0]);
 		}
 		
+		$courses = $this->toArray($courses);
+
 		$limit = ceil(count($courses) / 10.0);
         $courses = array_slice($courses, 10 * ($page - 1) , 10 * ($page), true);
 
 		return view('courses.interest', compact('courses','page','limit'));
 	}
 
+	private function toArray($collection)
+   {
+      $transArray = array();
+      foreach ($collection as $element) {
+        array_push($transArray, $element);
+      }
+
+      return $transArray;
+   }
 }
