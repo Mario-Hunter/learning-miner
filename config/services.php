@@ -38,13 +38,13 @@ return [
     'facebook' => [
     'client_id' => '1361512743925513',
     'client_secret' => '9ed5cf75ebb02591b122253f36658a20',
-    'redirect' => 'http://localhost:8000/callback/facebook',
+    'redirect' => 'http://e-miner.herokuapp.com/callback/facebook',
     ],
 
     'google'=>[
     'client_id' => '103995467475-34cn6rsbaipahj1ng63l68f2747cpglv.apps.googleusercontent.com',
     'client_secret' => 'l78r7GY2J7CqjGOXlh5saN1J',
-    'redirect' => 'http://localhost:8000/callback/google',
+    'redirect' => 'http://e-miner.herokuapp.com/callback/google',
     ]
 
     ];
