@@ -7,6 +7,7 @@ Here You will find all the educational sources you need to push your limits to b
 Verify
 @endcomponent
 
+
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent

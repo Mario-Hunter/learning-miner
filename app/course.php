@@ -12,6 +12,7 @@ class Course extends Model
     protected $fillable = ['url','tags','name','title','description','image_url'];
 
 
+
     public function comments()
     {
     	return $this->hasMany(Comment::class);
